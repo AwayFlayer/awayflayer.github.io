@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel</title>
+    <link rel="icon" href="assets/wheel.ico">
+    <link rel="stylesheet" href="css/wheelStyles.css">
+    <link rel="stylesheet" href="css/wheelButtons.css">
+    <link rel="stylesheet" href="css/wheelAlerts.css">
+</head>
+<body>
+    <header>
+        <h1>Wheel</h1>
+    </header>
+    <main>
+        <section id="wheelContainer">
+            <div id="pointer" role="region" aria-label="Wheel Pointer"></div>
+            <canvas id="wheelCanvas" aria-label="Spinning Wheel"></canvas>
+        </section>
+        <section class="controlPanel">
+            <input type="text" id="optionInput" placeholder="New Option" aria-label="Input Option">
+            <button type="button" id="addOptionBtn">Add</button>
+            <button type="button" id="startSpinBtn">Spin</button>
+            <button type="button" id="resetWheelBtn">Clear All</button>
+            <button type="button" id="exportWheelBtn">Export Wheel</button>
+            <button type="button" id="exportStatsBtn">Export Statistics</button>
+            <label for="enableIntegrationToggle">Integration</label>
+            <input type="checkbox" id="enableIntegrationToggle" checked>
+        </section>
+        <section id="importPanel" hidden>
+            <h2>Import Wheel</h2>
+            <input type="file" id="jsonFileInput" accept=".json">
+            <label for="jsonFileInput">Choose a JSON file</label>
+            <button type="button" id="importBtn">Upload</button>
+        </section>
+        <section id="optionsListContainer">
+            <h2>Current Options List:</h2>
+            <ul id="optionsList" aria-label="Options List"></ul>
+        </section>
+    </main>
+    <div id="resultModal" hidden>
+        <div id="modalContent"></div>
+    </div>
+
+    <!-- Load modules using type="module" -->
+    <script type="module" src="js/wheelApp.js"></script>
+</body>
+</html>

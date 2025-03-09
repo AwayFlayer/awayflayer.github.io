@@ -1,0 +1,94 @@
+:root {
+    --btn-padding: 10px 20px;
+    --btn-border-radius: 5px;
+    --btn-font-size: 16px;
+    --btn-transition: background-color 0.3s, transform 0.3s;
+    --btn-hover-scale: 1.05;
+}
+
+.editButton, .deleteButton {
+    padding: var(--btn-padding);
+    border-radius: var(--btn-border-radius);
+    border: none;
+    cursor: pointer;
+    font-size: var(--btn-font-size);
+    transition: var(--btn-transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editButton {
+    background-color: transparent;
+    color: #007bff;
+}
+
+.editButton:hover {
+    color: #0056b3;
+    transform: scale(var(--btn-hover-scale));
+}
+
+.deleteButton {
+    background-color: transparent;
+    color: red;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.deleteButton:hover {
+    color: darkred;
+    transform: scale(1.2);
+}
+
+#startStop, #clearAll, #exportTimers, #importTimers {
+    font-size: 1.5em;
+    padding: 15px 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--btn-border-radius);
+    color: white;
+    transition: var(--btn-transition);
+    margin: 5px;
+}
+
+#startStop {
+    background-color: #28a745;
+    width: 50%;
+}
+
+#startStop:hover {
+    background-color: #218838;
+    transform: scale(var(--btn-hover-scale));
+}
+
+#clearAll {
+    background-color: #dc3545;
+    width: 20%;
+}
+
+#clearAll:hover {
+    background-color: #c82333;
+    transform: scale(var(--btn-hover-scale));
+}
+
+#exportTimers {
+    background-color: #17a2b8;
+    width: 10%;
+}
+
+#exportTimers:hover {
+    background-color: #138496;
+    transform: scale(var(--btn-hover-scale));
+}
+
+#importTimers {
+    background-color: #ffc107;
+    width: 10%;
+    color: black;
+}
+
+#importTimers:hover {
+    background-color: #e0a800;
+    transform: scale(var(--btn-hover-scale));
+}

@@ -1,0 +1,403 @@
+/* Modern dark theme styles for wheel application */
+
+:root {
+    /* Dark theme color palette */
+    --primary-color: #6c5ce7;
+    --primary-light: #a29bfe;
+    --secondary-color: #00b894;
+    --secondary-light: #55efc4;
+    --background-dark: #151a21;
+    --background-card: #1e2530;
+    --text-primary: #f1f2f6;
+    --text-secondary: #a4b0be;
+    --border-color: #313a46;
+    --accent-color: #ff7675;
+    --accent-light: #fab1a0;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(0, 0, 0, 0.15);
+    
+    /* Typography */
+    --font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    
+    /* Animation */
+    --transition-fast: 0.15s;
+    --transition-normal: 0.25s;
+    --transition-slow: 0.4s;
+    
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+  }
+  
+  /* Reset and base styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color var(--transition-normal) ease;
+  }
+  
+  header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    position: relative;
+  }
+  
+  h1 {
+    color: var(--primary-light);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: var(--space-md);
+    position: relative;
+    display: inline-block;
+  }
+  
+  h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--radius-full);
+  }
+  
+  h2 {
+    color: var(--secondary-light);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: var(--space-md) 0;
+    letter-spacing: -0.3px;
+  }
+  
+  main {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Wheel container styles */
+  #wheelContainer {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto var(--space-lg);
+  }
+  
+  #wheelCanvas {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
+                0 0 15px var(--primary-color),
+                0 0 1px var(--primary-light);
+    transition: transform var(--transition-normal) ease;
+    filter: drop-shadow(0 0 8px rgba(108, 92, 231, 0.4));
+  }
+  
+  #pointer {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid var(--accent-color);
+    z-index: 10;
+    filter: drop-shadow(0 0 5px var(--accent-light));
+  }
+  
+  /* Control panel styles */
+  .controlPanel {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--background-card);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border: 1px solid var(--border-color);
+  }
+  
+  #optionInput {
+    flex: 1 1 60%;
+    min-width: 200px;
+    padding: var(--space-sm) var(--space-md);
+    background-color: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-md);
+    transition: all var(--transition-fast) ease;
+  }
+  
+  #optionInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.3);
+  }
+  
+  #optionInput::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+  }
+  
+  /* Import panel styles */
+  #importPanel {
+    width: 100%;
+    padding: var(--space-lg);
+    margin: var(--space-md) 0;
+    background-color: var(--background-card);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    text-align: center;
+    border: 1px solid var(--border-color);
+  }
+  
+  #importPanel h2 {
+    margin-bottom: var(--space-md);
+  }
+  
+  #importPanel label {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    margin: var(--space-md);
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+    border: 1px solid var(--primary-light);
+  }
+  
+  #importPanel label:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px var(--shadow-light);
+  }
+  
+  #jsonFileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  /* Options list styles */
+  #optionsListContainer {
+    width: 100%;
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+    background-color: var(--background-card);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border: 1px solid var(--border-color);
+  }
+  
+  #optionsList {
+    list-style: none;
+  }
+  
+  #optionsList li {
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition-fast) ease;
+  }
+  
+  #optionsList li:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+  
+  #optionsList li:last-child {
+    border-bottom: none;
+  }
+  
+  #optionsList li strong {
+    margin-right: var(--space-sm);
+    color: var(--primary-light);
+    font-weight: 600;
+  }
+  
+  #optionsList li span {
+    flex: 1;
+    color: var(--text-primary);
+  }
+  
+  /* Result modal styles */
+  #resultModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  #modalContent {
+    background-color: var(--background-card);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    border: 1px solid var(--primary-color);
+    animation: modalFadeIn 0.3s ease-out forwards;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Checkbox styling */
+  input[type="checkbox"] {
+    margin-left: var(--space-sm);
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-light);
+  }
+  
+  input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--background-dark);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: var(--radius-full);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+  }
+  
+  /* Label styles */
+  label {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .controlPanel {
+      flex-direction: column;
+      padding: var(--space-md);
+    }
+    
+    #optionInput {
+      width: 100%;
+    }
+    
+    #modalContent {
+      width: 90%;
+      padding: var(--space-lg);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      padding: var(--space-sm);
+    }
+    
+    h1 {
+      font-size: var(--font-size-xl);
+    }
+    
+    .controlPanel {
+      padding: var(--space-sm);
+    }
+    
+    #wheelContainer {
+      max-width: 300px;
+    }
+  }

@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.timers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: left;
+    margin-top: 40px;
+}
+
+.timer {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .timers {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .timer {
+        font-size: 1.2em;
+    }
+}
