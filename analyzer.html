@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyzer</title>
+    <link rel="stylesheet" href="css/analyzerStyles.css">
+    <link rel="stylesheet" href="css/analyzerFiles.css">
+    <link rel="stylesheet" href="css/analyzerCharts.css">
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <header>
+            <h1>JSON Analyzer</h1>
+        </header>
+
+        <section class="file-upload-section">
+            <div class="upload-container">
+                <label for="file-upload" class="file-upload-label">
+                    <svg class="upload-icon" viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                    </svg>
+                    <span>Choose JSON file(s)</span>
+                </label>
+                <input type="file" id="file-upload" multiple accept=".json">
+            </div>
+            <div class="selected-files" id="selected-files">
+                <p class="empty-message">No files to display</p>
+                <ul id="file-list"></ul>
+            </div>
+        </section>
+
+        <section class="visualization-controls">
+            <h2>Chars</h2>
+            <div class="chart-type-toggle">
+                <button id="pie-chart-btn" class="chart-btn active" data-chart-type="pie">Pie Char</button>
+                <button id="bar-chart-btn" class="chart-btn" data-chart-type="bar">Bar Char</button>
+            </div>
+        </section>
+
+        <section class="chart-section">
+            <div id="chart-container" class="chart-container">
+                <div class="empty-chart-message">
+                    <p>No data to display</p>
+                </div>
+            </div>
+            <div class="chart-legend" id="chart-legend"></div>
+        </section>
+
+        <section class="data-section">
+            <h2>Data</h2>
+            <div id="data-summary" class="data-summary">
+                <p class="empty-message">No data to display</p>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="js/analyzerApp.js"></script>
+</body>
+</html>

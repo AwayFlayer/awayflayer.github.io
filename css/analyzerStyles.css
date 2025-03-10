@@ -1,0 +1,59 @@
+:root {
+    --primary-color: #6200ea;
+    --primary-light: #7c4dff;
+    --primary-dark: #4a148c;
+    --secondary-color: #00e5ff;
+    --text-light: #f5f5f5;
+    --text-dark: #212121;
+    --bg-dark: #121212;
+    --card-dark: #1e1e1e;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+    --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    transition: var(--transition);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+}
