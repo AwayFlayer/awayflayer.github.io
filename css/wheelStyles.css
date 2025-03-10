@@ -281,6 +281,7 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px); /* Safari 9+ */
     justify-content: center;
     align-items: center;
     z-index: 100;

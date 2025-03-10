@@ -147,8 +147,8 @@ export const ui = {
                 <div class="timer-top">
                     ${!isLiveMode ? `
                         <div class="timer-actions">
-                            <button class="action-btn edit" data-index="${originalIndex}">Edit</button>
-                            <button class="action-btn delete" data-index="${originalIndex}">Delete</button>
+                            <button type="button" class="action-btn edit" data-index="${originalIndex}">Edit</button>
+                            <button type="button" class="action-btn delete" data-index="${originalIndex}">Delete</button>
                         </div>
                     ` : ''}
                 </div>
