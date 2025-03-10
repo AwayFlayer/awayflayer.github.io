@@ -1,0 +1,118 @@
+/*
+ * File Name: effects.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+ /* Loading idicator section */
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    color: var(--text-light);
+}
+
+/* Spinner section */
+.spinner {
+    will-change: transform;
+    animation: spin 1s infinite ease-in-out;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-light);
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error message section */
+.error-message {
+    will-change: transform;
+    animation: slide-in 0.3s ease-out;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #d32f2f;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 400px;
+}
+
+@keyframes slide-in {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Error message close button */
+.error-message .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+}
+
+/* Chart zoom label */
+.zoom-label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    /* Add will-change only for the property that's changing */
+    will-change: opacity;
+}
+
+/* Chart container section */
+.chart-container:hover .zoom-label,
+.chart-container.is-zoomed .zoom-label {
+    opacity: 1;
+}
+
+/* Zoom button */
+.zoom-btn {
+    will-change: transform, background-color;
+}
+ /* Chart instructions section*/
+.chart-instructions {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    color: var(--text-light);
+    opacity: 0.7;
+}
+
+/* Chart smooth transitions when switching between chart types section */
+.chart-container canvas {
+    transition: opacity 0.2s;
+    will-change: opacity;
+}
+
+/* Charts container switching section */
+.chart-container.switching canvas {
+    opacity: 0;
+}

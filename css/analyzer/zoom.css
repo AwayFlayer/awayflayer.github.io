@@ -1,0 +1,82 @@
+/*
+ * File Name: zoom.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Chart cotainer section */
+.chart-container {
+    position: relative;
+    cursor: grab;
+}
+
+/* Zoom controls section */
+.chart-zoom-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    padding: 5px;
+    z-index: 10;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+/* Chart zoom controls :hover section */
+.chart-zoom-controls:hover {
+    opacity: 1;
+}
+
+/* Zoom buttons section */
+.zoom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background: var(--card-dark);
+    border: 1px solid var(--primary-dark);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Zoom button :hover section */
+.zoom-btn:hover {
+    background: var(--primary-dark);
+}
+
+/*  Zoom button SVG section */
+.zoom-btn svg {
+    fill: var(--text-light);
+}
+
+/* Zoom label section */
+.zoom-label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: var(--text-light);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Chart container section*/
+.chart-container:hover .zoom-label,
+.chart-container.is-zoomed .zoom-label {
+    opacity: 0.7;
+}
+
+/* Add visual feedback when dragging */
+.chart-container.is-dragging {
+    cursor: grabbing;
+}

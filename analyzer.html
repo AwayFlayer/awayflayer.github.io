@@ -1,0 +1,95 @@
+<!--
+  -- File Name: index.html
+  -- Copyright (c) 2025 AwayFlayer
+  -- License: MIT
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyzer</title>
+    <link rel="icon" href="assets/analyzer/favicon.ico">
+    <link rel="stylesheet" href="css/analyzer/main.css">
+
+    <!-- JavaScript module section -->
+    <script type="module" src="js/analyzer/main.js"></script>
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <header>
+            <h1>Statistics Analyzer</h1>
+        </header>
+
+        <!-- File upload section --> 
+        <section class="file-upload-section">
+            <div class="upload-container">
+                <label for="file-upload" class="file-upload-label">
+                    <!-- File icon section -->
+                    <svg width="32" height="32" viewBox="0 0 32 32">
+                        <path d="M6 2h12l6 6v20H6z" fill="#E6E6E6" stroke="#000" stroke-width="1"/>
+                        <path d="M18 2v6h6" fill="#CCCCCC" stroke="#000" stroke-width="1"/>
+                        <line x1="8" y1="12" x2="24" y2="12" stroke="#000" stroke-width="1"/>
+                        <line x1="8" y1="16" x2="24" y2="16" stroke="#000" stroke-width="1"/>
+                        <line x1="8" y1="20" x2="24" y2="20" stroke="#000" stroke-width="1"/>
+                        <line x1="8" y1="24" x2="20" y2="24" stroke="#000" stroke-width="1"/>
+                    </svg>                    
+                    <span>Choose JSON Files</span>
+                </label>
+                <input type="file" id="file-upload" accept=".json" multiple>
+            </div>
+            
+            <!-- Selected files section -->
+            <div id="selected-files">
+                <h3>Selected Files</h3>
+                <ul id="file-list" class="file-list">
+                    <li class="empty-message">No files selected</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Visualization section -->
+        <section class="visualization-section">
+            <div class="chart-controls">
+                <!-- Chart buttons section -->
+                <div class="chart-type-toggles">
+                    <button type="button" id="pie-chart-btn" class="chart-btn active" data-chart-type="pie">
+                        <svg width="16" height="16" viewBox="0 0 32 32">
+                            <circle cx="16" cy="16" r="16" fill="#fff" />
+                            <path d="M16,0 A16,16 0 1,1 0,16 L16,16 Z" fill="#fff" />
+                        </svg>
+                        <span>Pie Chart</span>
+                    </button>
+                    <button type="button" id="bar-chart-btn" class="chart-btn" data-chart-type="bar">
+                        <svg width="16" height="16" viewBox="0 0 32 32">
+                            <rect x="4" y="20" width="4" height="8" fill="#fff" />
+                            <rect x="12" y="12" width="4" height="16" fill="#fff" />
+                            <rect x="20" y="8" width="4" height="20" fill="#fff" />
+                        </svg>
+                        <span>Bar Chart</span>
+                    </button>
+                </div>
+                <div class="chart-instructions">
+                    <span class="instruction-text">Scroll to zoom, drag to pan, double-click to reset view</span>
+                </div>
+            </div>
+            <!-- Chart container section -->
+            <div id="chart-container" class="chart-container">
+                <div class="empty-chart-message">
+                    <p>Select JSON files to see visualization</p>
+                </div>
+            </div>
+            <div id="chart-legend" class="chart-legend"></div>
+        </section>
+
+        <!-- Data summary section -->
+        <section class="data-section">
+            <h2>Data Summary</h2>
+            <div id="data-summary" class="data-summary">
+                <p class="empty-message">No data to display</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
