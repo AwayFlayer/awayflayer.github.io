@@ -98,7 +98,7 @@ export const ui = {
         container.innerHTML = '';
         
         // Filter out timers that have reached zero
-        const activeTimers = timers.filter(timer => timer.time > 0);
+        const activeTimers = timers.filter(timer => timer.time > 0|| timer.time == null);
         
         // Display a message if no active timers
         if (activeTimers.length === 0) {
@@ -153,9 +153,15 @@ export const ui = {
                     ` : ''}
                 </div>
                 <div class="timer-display">
-                    <span class="timer-name">${formattedText}</span> <span class="timer-time">${formattedTime}</span>
+                    <span class="timer-name">${formattedText}</span>`;
+            
+            if (timer.time == null) {
+                timerContent += `</div>`
+            } else {
+                timerContent += ` <span class="timer-time">${formattedTime}</span>
                 </div>
             `;
+            }
             
             timerRow.innerHTML = timerContent;
             currentColumn.appendChild(timerRow);

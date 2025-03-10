@@ -9,23 +9,22 @@
     <link rel="stylesheet" href="css/timerButtons.css">
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <h1>Timer</h1>
+        <section class="control-buttons" id="controlButtons">
+            <button type="button" id="startStopBtn" class="btn start">Start</button>
+            <button type="button" id="clearAllBtn" class="btn">Clear All</button>
+            <button type="button" id="exportBtn" class="btn">Export</button>
+            <button type="button" id="importBtn" class="btn">Import</button>
+            <input type="file" id="importFile" accept=".json" style="display:none" title="Import File" placeholder="Select a file">
+        </section>
         
-        <div class="control-buttons" id="controlButtons">
-            <button id="startStopBtn" class="btn start">Start</button>
-            <button id="clearAllBtn" class="btn">Clear All</button>
-            <button id="exportBtn" class="btn">Export</button>
-            <button id="importBtn" class="btn">Import</button>
-            <input type="file" id="importFile" accept=".json" style="display:none">
-        </div>
-        
-        <div class="timers-container-wrapper">
+        <section class="timers-container-wrapper">
             <div class="timers-container" id="timersContainer">
                 <!-- Timers will be injected here dynamically -->
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
     
     <script type="module" src="js/timerApp.js"></script>
 </body>

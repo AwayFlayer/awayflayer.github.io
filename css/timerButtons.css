@@ -1,3 +1,5 @@
+/* Buttons */
+
 .control-buttons {
     display: flex;
     justify-content: center;
@@ -51,7 +53,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 250px;
 }
 
 .timer-row {
@@ -67,14 +68,13 @@
 
 .timer-display {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin: 8px 0;
     white-space: nowrap;
     flex-grow: 1;
 }
 
 .timer-name {
+    color: greenyellow;
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
@@ -143,4 +143,38 @@
     .timer-column {
         width: 100%;
     }
+}
+
+/* Add icons to buttons (requires adding icon elements in HTML) */
+.btn.start::before {
+    content: '▷';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+.btn.stop::before {
+    content: '||';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+#clearAllBtn::before {
+    color: red;
+    content: '↺';
+    margin-right: 6px;
+    font-weight: 700;
+  }
+
+#exportBtn::before {
+    color: green;
+    content: '↓';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+#importBtn::before {
+    color: green;
+    content: '↑';
+    margin-right: 6px;
+    font-weight: 700;
 }
