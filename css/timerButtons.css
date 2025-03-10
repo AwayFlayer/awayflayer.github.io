@@ -1,94 +1,146 @@
-:root {
-    --btn-padding: 10px 20px;
-    --btn-border-radius: 5px;
-    --btn-font-size: 16px;
-    --btn-transition: background-color 0.3s, transform 0.3s;
-    --btn-hover-scale: 1.05;
-}
-
-.editButton, .deleteButton {
-    padding: var(--btn-padding);
-    border-radius: var(--btn-border-radius);
-    border: none;
-    cursor: pointer;
-    font-size: var(--btn-font-size);
-    transition: var(--btn-transition);
-    display: inline-flex;
-    align-items: center;
+.control-buttons {
+    display: flex;
     justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
 }
 
-.editButton {
-    background-color: transparent;
-    color: #007bff;
-}
-
-.editButton:hover {
-    color: #0056b3;
-    transform: scale(var(--btn-hover-scale));
-}
-
-.deleteButton {
-    background-color: transparent;
-    color: red;
-    font-size: 20px;
-    padding: 0;
-    margin: 0;
-}
-
-.deleteButton:hover {
-    color: darkred;
-    transform: scale(1.2);
-}
-
-#startStop, #clearAll, #exportTimers, #importTimers {
-    font-size: 1.5em;
+.btn {
     padding: 15px 30px;
-    cursor: pointer;
+    font-size: 18px;
     border: none;
-    border-radius: var(--btn-border-radius);
-    color: white;
-    transition: var(--btn-transition);
-    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: var(--card-bg);
+    color: var(--primary-text);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    min-width: 150px;
+    text-align: center;
 }
 
-#startStop {
-    background-color: #28a745;
-    width: 50%;
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#startStop:hover {
-    background-color: #218838;
-    transform: scale(var(--btn-hover-scale));
+.btn.start {
+    background-color: var(--success-color);
 }
 
-#clearAll {
-    background-color: #dc3545;
-    width: 20%;
+.btn.stop {
+    background-color: var(--danger-color);
 }
 
-#clearAll:hover {
-    background-color: #c82333;
-    transform: scale(var(--btn-hover-scale));
+.timers-container-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 0;
 }
 
-#exportTimers {
-    background-color: #17a2b8;
-    width: 10%;
+.timers-container {
+    display: flex;
+    gap: 15px;
+    align-content: flex-start;
+    max-width: 100%;
+    padding-left: 10px;
 }
 
-#exportTimers:hover {
-    background-color: #138496;
-    transform: scale(var(--btn-hover-scale));
+.timer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
 }
 
-#importTimers {
-    background-color: #ffc107;
-    width: 10%;
-    color: black;
+.timer-row {
+    display: flex;
+    flex-direction: column;
 }
 
-#importTimers:hover {
-    background-color: #e0a800;
-    transform: scale(var(--btn-hover-scale));
+.timer-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+}
+
+.timer-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+    white-space: nowrap;
+    flex-grow: 1;
+}
+
+.timer-name {
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.timer-time {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: monospace;
+    margin-left: 8px;
+}
+
+.timer-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--primary-text);
+    font-size: 12px;
+    transition: all 0.2s ease;
+    padding: 4px 6px;
+}
+
+.action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.action-btn.edit:hover {
+    background-color: var(--accent-color);
+}
+
+.action-btn.delete:hover {
+    background-color: var(--danger-color);
+}
+
+/* Timer ending styles */
+.timer-ending {
+    color: var(--danger-color);
+}
+
+/* No timers message */
+.no-timers {
+    margin-left: 10px;
+    color: var(--secondary-text);
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .control-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .timers-container {
+        flex-direction: column;
+    }
+    
+    .timer-column {
+        width: 100%;
+    }
 }

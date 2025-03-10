@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="icon" href="assets/timer.ico">
+    <link rel="stylesheet" href="css/timerStyles.css">
+    <link rel="stylesheet" href="css/timerButtons.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Timer</h1>
+        
+        <div class="control-buttons" id="controlButtons">
+            <button id="startStopBtn" class="btn start">Start</button>
+            <button id="clearAllBtn" class="btn">Clear All</button>
+            <button id="exportBtn" class="btn">Export</button>
+            <button id="importBtn" class="btn">Import</button>
+            <input type="file" id="importFile" accept=".json" style="display:none">
+        </div>
+        
+        <div class="timers-container-wrapper">
+            <div class="timers-container" id="timersContainer">
+                <!-- Timers will be injected here dynamically -->
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="js/timerApp.js"></script>
+</body>
+</html>
