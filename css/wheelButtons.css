@@ -126,18 +126,22 @@ button {
   }
   
   .editButton {
-    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    background: transparent;
+    color: #0984e3;
+    width: 66px;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .editButton:hover {
     background: linear-gradient(135deg, #85c6ff, #2393f0);
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .deleteButton {
-    background: linear-gradient(135deg, #e17055, #d63031);
+    background: transparent;
+    color: #d63031;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -151,6 +155,7 @@ button {
   
   .deleteButton:hover {
     background: linear-gradient(135deg, #e88070, #e74c3c);
+    color: white;
     transform: translateY(-2px) scale(1.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
