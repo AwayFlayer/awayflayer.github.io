@@ -200,6 +200,7 @@ const addZoomControls = (container, state, renderCallback) => {
     
     // Create zoom in button
     const zoomInButton = document.createElement('button');
+    zoomInButton.type = "button";
     zoomInButton.classList.add('zoom-btn');
     zoomInButton.innerHTML = `
         <svg viewBox="0 0 24 24" width="16" height="16">
@@ -210,6 +211,7 @@ const addZoomControls = (container, state, renderCallback) => {
     
     // Create zoom out button
     const zoomOutButton = document.createElement('button');
+    zoomOutButton.type = "button";
     zoomOutButton.classList.add('zoom-btn');
     zoomOutButton.innerHTML = `
         <svg viewBox="0 0 24 24" width="16" height="16">
@@ -220,6 +222,7 @@ const addZoomControls = (container, state, renderCallback) => {
     
     // Create reset button
     const resetButton = document.createElement('button');
+    resetButton.type = "button";
     resetButton.classList.add('zoom-btn');
     resetButton.innerHTML = `
         <svg viewBox="0 0 24 24" width="16" height="16">

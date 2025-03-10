@@ -182,7 +182,7 @@ export const renderBarChart = (data, canvas, viewState = null) => {
         
         // Truncate long labels
         let label = key;
-        if (label.length > 12) {
+        if (label.length > 50) {
             label = label.substring(0, 10) + '...';
         }
         
