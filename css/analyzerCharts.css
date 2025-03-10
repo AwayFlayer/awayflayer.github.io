@@ -29,6 +29,12 @@
     color: white;
 }
 
+.chart-btn::before {
+    content: '+';
+    margin-right: 6px;
+    font-weight: 700;
+  }
+
 /* Chart Section */
 .chart-section {
     display: flex;

@@ -5,6 +5,7 @@ import { renderBarChart } from './charts/barChart.js';
 
 let files = [];
 let activeChartType = 'pie';
+let processedData = null;
 
 export const initFileHandler = () => {
     const fileInput = document.getElementById('file-upload');
@@ -37,209 +38,250 @@ export const initFileHandler = () => {
 
     function updateFileList() {
         // Clear the "empty message" if there are files
-        const emptyMessage = document.querySelector('#selected-files .empty-message');
+        const emptyMessage = document.querySelector('#file-list .empty-message');
         if (emptyMessage && files.length > 0) {
-            emptyMessage.style.display = 'none';
-        } else if (emptyMessage && files.length === 0) {
-            emptyMessage.style.display = 'block';
+            emptyMessage.remove();
+        } else if (!emptyMessage && files.length === 0) {
+            const li = document.createElement('li');
+            li.classList.add('empty-message');
+            li.textContent = 'No files selected';
+            fileList.appendChild(li);
         }
 
         // Clear the current list
-        fileList.innerHTML = '';
-        
-        // Add each file to the list with a remove button
-        files.forEach((file, index) => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span>${file.name}</span>
-                <button class="file-remove" data-index="${index}">✕</button>
-            `;
-            fileList.appendChild(li);
-        });
-        
-        // Add remove button event listeners
-        document.querySelectorAll('.file-remove').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const index = parseInt(e.target.dataset.index);
-                removeFile(index);
+        if (files.length > 0) {
+            fileList.innerHTML = '';
+            
+            // Add each file to the list with a remove button
+            files.forEach((file, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${file.name}</span>
+                    <button class="file-remove" data-index="${index}">✕</button>
+                `;
+                fileList.appendChild(li);
             });
-        });
+            
+            // Add remove button event listeners
+            document.querySelectorAll('.file-remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    removeFile(index);
+                });
+            });
+        }
     }
 
     function removeFile(index) {
-        files = files.filter((_, i) => i !== index);
+        // Remove the file from our array
+        files.splice(index, 1);
+        
+        // Update the UI
         updateFileList();
         
-        if (files.length === 0) {
-            resetChartAndSummary();
-        } else {
+        // Reprocess the remaining files
+        if (files.length > 0) {
             processFiles();
+        } else {
+            // If no files left, clear the chart and data summary
+            clearVisualization();
         }
-    }
-
-    function resetChartAndSummary() {
-        // Reset chart container
-        chartContainer.innerHTML = `
-            <div class="empty-chart-message">
-                <p>Wybierz pliki JSON, aby zobaczyć wizualizację</p>
-            </div>
-        `;
-        
-        // Reset data summary
-        dataSummary.innerHTML = `<p class="empty-message">Brak danych do wyświetlenia</p>`;
-        
-        // Reset legend
-        document.getElementById('chart-legend').innerHTML = '';
     }
 
     function processFiles() {
-        // Start reading all JSON files
-        const fileReadPromises = files.map(file => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                
-                reader.onload = (e) => {
-                    try {
-                        const jsonData = JSON.parse(e.target.result);
-                        resolve({
-                            name: file.name,
-                            data: jsonData
-                        });
-                    } catch (error) {
-                        reject({
-                            file: file.name,
-                            error: 'Invalid JSON format'
-                        });
-                    }
-                };
-                
-                reader.onerror = () => reject({
-                    file: file.name,
-                    error: 'Error reading file'
-                });
-                
-                reader.readAsText(file);
-            });
-        });
+        // Show loading indicator
+        showLoading();
         
-        // Process all files once they are read
-        Promise.allSettled(fileReadPromises)
-            .then(results => {
-                // Filter successful reads and failed ones
-                const validData = results
-                    .filter(result => result.status === 'fulfilled')
-                    .map(result => result.value);
+        // Process files asynchronously
+        Promise.all(files.map(readFileAsJson))
+            .then(jsonFiles => {
+                // Process the data
+                processedData = processJsonData(jsonFiles);
                 
-                const errors = results
-                    .filter(result => result.status === 'rejected')
-                    .map(result => result.reason);
-                
-                if (errors.length > 0) {
-                    console.error('Some files could not be processed:', errors);
-                    // Show errors in UI if needed
-                }
-                
-                if (validData.length > 0) {
-                    // Process the JSON data
-                    const processedData = processJsonData(validData);
-                    
-                    // Update the chart based on the current active chart type
-                    updateVisualization(processedData);
-                    
-                    // Update the data summary
-                    updateDataSummary(processedData);
-                } else {
-                    resetChartAndSummary();
-                }
+                // Update visualization
+                updateVisualization();
+            })
+            .catch(error => {
+                console.error('Error processing files:', error);
+                showError(error.message);
+            })
+            .finally(() => {
+                // Hide loading indicator
+                hideLoading();
             });
     }
 
-    function setChartType(type) {
-        activeChartType = type;
-        
-        // Update UI buttons
-        document.querySelectorAll('.chart-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.chartType === type);
+    function readFileAsJson(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            
+            reader.onload = (event) => {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    resolve({ name: file.name, data });
+                } catch (error) {
+                    reject(new Error(`Invalid JSON in file: ${file.name}`));
+                }
+            };
+            
+            reader.onerror = () => {
+                reject(new Error(`Failed to read file: ${file.name}`));
+            };
+            
+            reader.readAsText(file);
         });
-        
-        // If there are files, update the visualization
-        if (files.length > 0) {
-            processFiles();
-        }
     }
 
-    function updateVisualization(data) {
-        // Clear the chart container
-        chartContainer.innerHTML = '';
-        
-        // Create a canvas for the chart
-        const canvas = document.createElement('canvas');
-        canvas.id = 'chart-canvas';
-        chartContainer.appendChild(canvas);
-        
-        // Render the appropriate chart based on active type
-        if (activeChartType === 'pie') {
-            renderPieChart(data, canvas);
-        } else {
-            renderBarChart(data, canvas);
-        }
-    }
-
-    function updateDataSummary(processedData) {
-        // Format and display the summarized data
-        dataSummary.innerHTML = '';
-        
+    function updateVisualization() {
         if (!processedData || Object.keys(processedData).length === 0) {
-            dataSummary.innerHTML = '<p class="empty-message">Brak danych do wyświetlenia</p>';
+            clearVisualization();
             return;
         }
         
-        // Create a table to display the data
-        const table = document.createElement('table');
-        table.classList.add('data-table');
-        
-        // Add table header
-        const thead = document.createElement('thead');
-        thead.innerHTML = `
-            <tr>
-                <th>Nazwa</th>
-                <th>Wartość</th>
-                <th>Procent</th>
-            </tr>
-        `;
-        table.appendChild(thead);
-        
-        // Calculate total
+        // Clear the empty message
+        const emptyChartMessage = chartContainer.querySelector('.empty-chart-message');
+        if (emptyChartMessage) {
+            emptyChartMessage.style.display = 'none';
+        }
+
+        // Make sure we have a canvas to draw on
+        let canvas = chartContainer.querySelector('canvas');
+        if (!canvas) {
+            canvas = document.createElement('canvas');
+            chartContainer.appendChild(canvas);
+        }
+
+        // Render the appropriate chart type
+        if (activeChartType === 'pie') {
+            renderPieChart(processedData, canvas);
+        } else {
+            renderBarChart(processedData, canvas);
+        }
+
+        // Update the data summary
+        updateDataSummary();
+    }
+
+    function clearVisualization() {
+        // Check if we need to show the empty message
+        let emptyChartMessage = chartContainer.querySelector('.empty-chart-message');
+        if (!emptyChartMessage) {
+            emptyChartMessage = document.createElement('div');
+            emptyChartMessage.classList.add('empty-chart-message');
+            emptyChartMessage.innerHTML = '<p>Select JSON files to see visualization</p>';
+            chartContainer.innerHTML = '';
+            chartContainer.appendChild(emptyChartMessage);
+        } else {
+            emptyChartMessage.style.display = 'block';
+        }
+
+        // Clear the legend
+        const legendContainer = document.getElementById('chart-legend');
+        if (legendContainer) {
+            legendContainer.innerHTML = '';
+        }
+
+        // Clear the data summary
+        dataSummary.innerHTML = '<p class="empty-message">No data to display</p>';
+    }
+
+    function updateDataSummary() {
+        if (!processedData || Object.keys(processedData).length === 0) {
+            dataSummary.innerHTML = '<p class="empty-message">No data to display</p>';
+            return;
+        }
+
+        // Calculate total for percentage
         const total = Object.values(processedData).reduce((sum, value) => sum + value, 0);
         
-        // Add table body
-        const tbody = document.createElement('tbody');
+        // Create a table to display the data
+        let tableHTML = `
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
         
-        // Sort data by value (descending)
-        const sortedData = Object.entries(processedData)
-            .sort((a, b) => b[1] - a[1]);
-            
+        // Sort data by value in descending order
+        const sortedData = Object.entries(processedData).sort((a, b) => b[1] - a[1]);
+        
+        // Add rows to the table
         sortedData.forEach(([key, value]) => {
-            const percent = (value / total * 100).toFixed(1);
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${key}</td>
-                <td>${value}</td>
-                <td>${percent}%</td>
+            const percent = ((value / total) * 100).toFixed(1);
+            tableHTML += `
+                <tr>
+                    <td>${key}</td>
+                    <td>${value}</td>
+                    <td>${percent}%</td>
+                </tr>
             `;
-            tbody.appendChild(row);
         });
         
-        // Add total row
-        const totalRow = document.createElement('tr');
-        totalRow.innerHTML = `
-            <td><strong>SUMA</strong></td>
-            <td><strong>${total}</strong></td>
-            <td><strong>100.0%</strong></td>
+        tableHTML += `
+                </tbody>
+            </table>
         `;
-        tbody.appendChild(totalRow);
         
-        table.appendChild(tbody);
-        dataSummary.appendChild(table);
+        dataSummary.innerHTML = tableHTML;
+    }
+
+    function setChartType(type) {
+        // Don't do anything if it's the same type
+        if (activeChartType === type) return;
+        
+        activeChartType = type;
+        
+        // Update button states
+        document.querySelectorAll('.chart-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-chart-type="${type}"]`).classList.add('active');
+        
+        // Reset global chart interaction variables in the chart modules
+        // This is crucial - we need to tell the modules to reinitialize
+        window.resetChartInteractions = true;
+        
+        // Update visualization if we have data
+        if (processedData) {
+            updateVisualization();
+        }
+    }
+
+    function showLoading() {
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.classList.add('loading-indicator');
+        loadingIndicator.innerHTML = '<div class="spinner"></div><p>Processing files...</p>';
+        document.body.appendChild(loadingIndicator);
+    }
+
+    function hideLoading() {
+        const loadingIndicator = document.querySelector('.loading-indicator');
+        if (loadingIndicator) {
+            loadingIndicator.remove();
+        }
+    }
+
+    function showError(message) {
+        const errorMessage = document.createElement('div');
+        errorMessage.classList.add('error-message');
+        errorMessage.innerHTML = `<p>${message}</p><button class="close-btn">✕</button>`;
+        document.body.appendChild(errorMessage);
+        
+        // Add close button functionality
+        errorMessage.querySelector('.close-btn').addEventListener('click', () => {
+            errorMessage.remove();
+        });
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            if (document.body.contains(errorMessage)) {
+                errorMessage.remove();
+            }
+        }, 5000);
     }
 };

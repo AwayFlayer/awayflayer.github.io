@@ -1,17 +1,65 @@
-// Pie chart rendering functionality without using external libraries
+// Pie chart rendering functionality with zoom and pan support
+
+import { applyViewTransformation, initChartInteractions } from './chartInteraction.js';
+
+// Global variables to store interactions and tooltip
+let interactions = null;
+let tooltip = null;
 
 /**
  * Render a pie chart on the provided canvas
  * @param {Object} data - Object with key-value pairs to visualize
  * @param {HTMLCanvasElement} canvas - Canvas element to render on
+ * @param {Object} viewState - Optional zoom and pan state
  */
-export const renderPieChart = (data, canvas) => {
+export const renderPieChart = (data, canvas, viewState = null) => {
     const ctx = canvas.getContext('2d');
     
     // Set canvas size based on its container
     const container = canvas.parentElement;
     canvas.width = container.clientWidth;
     canvas.height = container.clientHeight;
+    
+    // Initialize tooltip if not created yet
+    if (!tooltip) {
+        tooltip = createTooltip(container);
+    }
+    
+    // Check if we need to reset interactions
+    if (window.resetChartInteractions === true) {
+        interactions = null;
+        window.resetChartInteractions = false;
+    }
+    
+    // Initialize or update interactions
+    if (!interactions) {
+        interactions = initChartInteractions(canvas, (state) => {
+            renderPieChart(data, canvas, state);
+        }, { chartType: 'pie', minZoom: 0.5, maxZoom: 5 });
+    }
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Apply zoom and pan transformations if provided
+    let restoreCtx = () => {};
+    if (viewState) {
+        restoreCtx = applyViewTransformation(ctx, viewState);
+        
+        // Update container class to show we're in zoom mode
+        if (viewState.zoomLevel !== 1) {
+            container.classList.add('is-zoomed');
+        } else {
+            container.classList.remove('is-zoomed');
+        }
+        
+        // Update cursor based on dragging state
+        if (viewState.isDragging) {
+            container.classList.add('is-dragging');
+        } else {
+            container.classList.remove('is-dragging');
+        }
+    }
     
     // Calculate center point and radius
     const centerX = canvas.width / 2;
@@ -27,11 +75,23 @@ export const renderPieChart = (data, canvas) => {
     // Sort data to make the pie chart more stable visually
     const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
     
+    // Store the segments data for tooltip detection
+    const segments = [];
+    
     // Draw pie slices
     let startAngle = -Math.PI / 2; // Start from the top (12 o'clock position)
     
     sortedData.forEach(([key, value], index) => {
         const sliceAngle = (value / total) * (Math.PI * 2);
+        
+        // Store segment data for tooltip detection
+        segments.push({
+            key,
+            value,
+            startAngle,
+            endAngle: startAngle + sliceAngle,
+            color: colors[index]
+        });
         
         // Draw slice
         ctx.beginPath();
@@ -52,7 +112,8 @@ export const renderPieChart = (data, canvas) => {
         const middleAngle = startAngle + sliceAngle / 2;
         const percent = Math.round((value / total) * 100);
         
-        if (percent >= 5) { // Only draw labels for slices >= 5%
+        // Only show labels for larger slices if not zoomed in
+        if (percent >= 5 || (viewState && viewState.zoomLevel > 1.5)) { 
             // Position for label is mid-angle, at 70% of radius length
             const labelX = centerX + Math.cos(middleAngle) * radius * 0.7;
             const labelY = centerY + Math.sin(middleAngle) * radius * 0.7;
@@ -71,8 +132,37 @@ export const renderPieChart = (data, canvas) => {
         startAngle += sliceAngle;
     });
     
+    // Add zoom level indicator if zoomed
+    if (viewState && viewState.zoomLevel !== 1) {
+        ctx.font = '12px sans-serif';
+        ctx.fillStyle = isDarkMode() ? 'rgba(245, 245, 245, 0.7)' : 'rgba(33, 33, 33, 0.7)';
+        ctx.textAlign = 'left';
+        ctx.fillText(`Zoom: ${Math.round(viewState.zoomLevel * 100)}%`, 10, 20);
+    }
+    
+    // Draw title
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillStyle = isDarkMode() ? '#f5f5f5' : '#212121';
+    ctx.textAlign = 'center';
+    ctx.fillText('Pie Chart', canvas.width / 2, 25);
+    
+    // Restore context if we modified it for zooming
+    if (viewState) {
+        restoreCtx();
+    }
+    
     // Create legend items
     updateLegend(sortedData, colors);
+    
+    // Store the data for tooltip usage
+    canvas.chartData = {
+        data: sortedData,
+        segments,
+        type: 'pie',
+        centerX,
+        centerY,
+        radius
+    };
 };
 
 /**
@@ -177,4 +267,16 @@ const updateLegend = (data, colors) => {
         legendItem.appendChild(label);
         legendContainer.appendChild(legendItem);
     });
+};
+
+/**
+ * Create tooltip element
+ * @param {HTMLElement} container - Container to append the tooltip to
+ * @returns {HTMLElement} - The created tooltip element
+ */
+const createTooltip = (container) => {
+    const tooltipEl = document.createElement('div');
+    tooltipEl.classList.add('chart-tooltip');
+    container.appendChild(tooltipEl);
+    return tooltipEl;
 };
