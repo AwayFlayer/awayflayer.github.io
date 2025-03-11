@@ -1,0 +1,42 @@
+/*
+ * File Name: icons.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Start button section */
+.btn.start::before {
+    content: '▷';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+/* Stop button section */
+.btn.stop::before {
+    content: '||';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+/* Clear all button section */
+#clearAllBtn::before {
+    color: red;
+    content: '↺';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+/* Import/Export button section */
+#exportBtn::before {
+    color: green;
+    content: '↓';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+#importBtn::before {
+    color: green;
+    content: '↑';
+    margin-right: 6px;
+    font-weight: 700;
+}

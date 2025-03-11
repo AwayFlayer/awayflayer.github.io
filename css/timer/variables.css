@@ -1,0 +1,17 @@
+/*
+ * File Name: variables.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Variables section */
+:root {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --primary-text: #ffffff;
+    --secondary-text: #b3b3b3;
+    --accent-color: #3498db;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+}

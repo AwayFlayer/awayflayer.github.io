@@ -1,0 +1,68 @@
+/*
+ * File Name: main.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Import CSS section */
+@import url('./variables.css');
+@import url('./buttons.css');
+@import url('./icons.css');
+
+/* Main page section */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    min-height: 100vh;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0;
+    padding-top: 20px;
+}
+
+.hidden-input {
+    display: none;
+}
+
+/* No timers message section */
+.no-timers {
+    margin-left: 10px;
+    color: var(--secondary-text);
+    font-size: 16px;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .control-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .timers-container {
+        flex-direction: column;
+    }
+    
+    .timer-column {
+        width: 100%;
+    }
+}

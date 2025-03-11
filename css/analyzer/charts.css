@@ -62,8 +62,11 @@
 
 /* Empty chart message section*/
 .empty-chart-message {
+    width: 100%;
+    height: 400px;
     text-align: center;
-    padding: 2rem;
+    padding: 5rem;
+    cursor: not-allowed;
 }
 
 /* Chart legend section */
