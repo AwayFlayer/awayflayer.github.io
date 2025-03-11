@@ -1,0 +1,66 @@
+/*
+ * File Name: wheelButtons.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Base button section */
+button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    outline: none;
+}
+  
+/* Button hover effect section */
+button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+  
+button:hover::after {
+    opacity: 1;
+}
+  
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+  
+/* Modal buttons section */
+  #modalContent button {
+    margin-top: 12px;
+    padding: 0.7rem 1.5rem;
+    min-width: 120px;
+}
+  
+/* Button state: disabled */
+button:disabled {
+    background: #7f8c8d;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+    animation: none;
+}

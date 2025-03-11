@@ -1,0 +1,140 @@
+/*
+ * File Name: main.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Import CSS section */
+@import url('./variables.css');
+@import url('./container.css');
+@import url('./importPanel.css');
+@import url('./buttons.css');
+@import url('./controlButtons.css');
+@import url('./optionList.css');
+@import url('./icons.css');
+@import url('./alerts.css');
+
+/* Main page section */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+  
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color var(--transition-normal) ease;
+}
+
+/* Headers section */
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    position: relative;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+h1 {
+    color: var(--primary-light);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: var(--space-md);
+    position: relative;
+    display: inline-block;
+}
+  
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--radius-full);
+}
+  
+h2 {
+    color: var(--secondary-light);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: var(--space-md) 0;
+    letter-spacing: -0.3px;
+}
+
+/* Responsive adjustments section */
+@media (max-width: 768px) {
+    button {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .controlPanel button {
+      margin: 0.25rem;
+      flex: 1 1 auto;
+    }
+
+    .controlPanel {
+        flex-direction: column;
+        padding: var(--space-md);
+    }
+
+    #optionInput {
+        width: 100%;
+    }
+      
+    #modalContent {
+        width: 90%;
+        padding: var(--space-lg);
+    }
+}
+  
+@media (max-width: 480px) {
+    .controlPanel button {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    
+    #startSpinBtn {
+      order: -1;
+      margin-bottom: 12px;
+    }
+
+    body {
+        padding: var(--space-sm);
+    }
+      
+    h1 {
+        font-size: var(--font-size-xl);
+    }
+      
+    .controlPanel {
+        padding: var(--space-sm);
+    }
+      
+    #wheelContainer {
+        max-width: 300px;
+    }
+}

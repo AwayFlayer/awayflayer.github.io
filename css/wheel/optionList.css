@@ -1,0 +1,78 @@
+/*
+ * File Name: optionList.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Edit and delete buttons section */
+.editButton,
+.deleteButton {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 600;
+    margin-left: 8px;
+    min-width: auto;
+    text-transform: none;
+}
+
+.editButton {
+    background: transparent;
+    color: #0984e3;
+    width: 66px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+  
+.editButton:hover {
+    background: #2393f0;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  
+.deleteButton {
+    background: transparent;
+    color: #d63031;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+  
+.deleteButton:hover {
+    background: #e74c3c;
+    color: white;
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  
+/* Controls layout */
+.controlPanel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+  
+/* Input styling to match buttons */
+#optionInput {
+    padding: 0.7rem 1rem;
+    background-color: rgba(255, 255, 255, 0.07);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+  
+#optionInput:focus {
+    outline: none;
+    border-color: #6c5ce7;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(108, 92, 231, 0.2);
+}

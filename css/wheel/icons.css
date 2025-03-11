@@ -1,0 +1,51 @@
+/*
+ * File Name: main.css
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
+/* Button text and icon positioning */
+button span.buttonText {
+    pointer-events: none;
+}
+  
+button i.buttonIcon {
+    margin-right: 6px;
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+/* Add option button section */
+#addOptionBtn::before {
+    content: '+';
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+/* Spin button section */
+#startSpinBtn::before {
+    content: '⟳';
+    margin-right: 6px;
+    font-size: 1.2rem;
+}
+
+/* Reset wheel button section */
+#resetWheelBtn::before {
+    content: '↺';
+    margin-right: 6px;
+    font-size: 1.2rem;
+}
+
+/* Export wheel button section */
+#exportWheelBtn::before {
+    content: '↓';
+    margin-right: 6px;
+    font-size: 1.2rem;
+}
+
+/* Export stats button section */
+#exportStatsBtn::before {
+    content: '↓';
+    margin-right: 6px;
+    font-size: 1.2rem;
+}

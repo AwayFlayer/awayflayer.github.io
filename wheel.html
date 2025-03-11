@@ -1,0 +1,72 @@
+<!--
+  -- File Name: index.html
+  -- Copyright (c) 2025 AwayFlayer
+  -- License: MIT
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel</title>
+    <link rel="icon" href="assets/wheel/favicon.ico">
+    <link rel="stylesheet" href="css/wheel/main.css">
+</head>
+<body>
+    <header>
+        <h1>Wheel</h1>
+    </header>
+    <main>
+
+        <!-- Wheel container section -->
+        <section id="wheelContainer">
+            <div id="pointer" role="region" aria-label="Wheel Pointer"></div>
+            <canvas id="wheelCanvas" aria-label="Spinning Wheel"></canvas>
+        </section>
+
+        <!-- Control panel section -->
+        <section class="controlPanel">
+            <input type="text" id="optionInput" placeholder="New Option" aria-label="Input Option">
+            <button type="button" id="addOptionBtn">Add</button>
+            <button type="button" id="startSpinBtn">Spin</button>
+            <button type="button" id="resetWheelBtn">Clear All</button>
+            <button type="button" id="exportWheelBtn">Export Wheel</button>
+            <button type="button" id="exportStatsBtn">Export Statistics</button>
+            <label for="enableIntegrationToggle">Integration</label>
+            <input type="checkbox" id="enableIntegrationToggle" checked>
+        </section>
+
+        <!-- Import panel section -->
+        <section id="importPanel" hidden>
+            <h2>Import Wheel</h2>
+            <label for="jsonFileInput">
+                <input type="file" id="jsonFileInput" accept=".json" placeholder="Choose a file">
+                 <!-- File icon section -->
+                 <svg width="32" height="32" viewBox="0 0 32 32">
+                    <path d="M6 2h12l6 6v20H6z" fill="#E6E6E6" stroke="#000" stroke-width="1"/>
+                    <path d="M18 2v6h6" fill="#CCCCCC" stroke="#000" stroke-width="1"/>
+                    <line x1="8" y1="12" x2="24" y2="12" stroke="#000" stroke-width="1"/>
+                    <line x1="8" y1="16" x2="24" y2="16" stroke="#000" stroke-width="1"/>
+                    <line x1="8" y1="20" x2="24" y2="20" stroke="#000" stroke-width="1"/>
+                    <line x1="8" y1="24" x2="20" y2="24" stroke="#000" stroke-width="1"/>
+                </svg>
+            </label>
+            <button type="button" id="importBtn">Upload</button>
+        </section>
+
+        <!-- Option list section -->
+        <section id="optionsListContainer">
+            <h2>Current Options List:</h2>
+            <ul id="optionsList" aria-label="Options List"></ul>
+        </section>
+    </main>
+    <!-- Result modal section -->
+    <div id="resultModal" hidden>
+        <div id="modalContent"></div>
+    </div>
+
+    <!-- JavaScript module section -->
+    <script type="module" src="js/wheel/main.js"></script>
+</body>
+</html>
