@@ -1,5 +1,10 @@
-// Chart type toggle functionality
+/*
+ * File Name: chartToggle.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
 
+// Chart type toggle functionality
 export const initChartTypeToggle = () => {
     const chartButtons = document.querySelectorAll('.chart-btn');
     

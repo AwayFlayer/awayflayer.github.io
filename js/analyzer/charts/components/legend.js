@@ -1,5 +1,7 @@
-/**
- * Chart legend component
+/*
+ * File Name: legend.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
  */
 
 /**

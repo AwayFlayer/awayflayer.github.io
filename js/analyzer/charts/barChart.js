@@ -1,5 +1,10 @@
-// Bar chart rendering functionality with zoom and pan support
+/*
+ * File Name: barChart.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
 
+// Bar chart rendering functionality with zoom and pan support
 import { applyViewTransformation, initChartInteractions } from './chartInteraction.js';
 
 // Global variables to store interactions and tooltip
@@ -182,8 +187,8 @@ export const renderBarChart = (data, canvas, viewState = null) => {
         
         // Truncate long labels
         let label = key;
-        if (label.length > 50) {
-            label = label.substring(0, 10) + '...';
+        if (label.length > 30) {
+            label = label.substring(0, 30) + '...';
         }
         
         ctx.fillText(label, 0, 0);

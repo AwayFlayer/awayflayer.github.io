@@ -1,3 +1,9 @@
+/*
+ * File Name: main.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
 // Main application entry point
 import { initFileHandler } from './analyzerHandlers.js';
 import { initChartTypeToggle } from './charts/chartToggle.js';

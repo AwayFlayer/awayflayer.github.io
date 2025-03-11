@@ -1,4 +1,8 @@
-// Chart interaction functionality for zooming and panning
+/*
+ * File Name: chartInteraction.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
 
 /**
  * Initialize zoom and pan functionality for charts

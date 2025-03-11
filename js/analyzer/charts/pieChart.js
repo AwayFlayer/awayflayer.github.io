@@ -1,5 +1,10 @@
-// Pie chart rendering functionality with zoom and pan support
+/*
+ * File Name: pieChart.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
 
+// Pie chart rendering functionality with zoom and pan support
 import { applyViewTransformation, initChartInteractions } from './chartInteraction.js';
 
 // Global variables to store interactions and tooltip

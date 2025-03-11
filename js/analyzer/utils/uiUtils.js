@@ -1,10 +1,10 @@
-/**
- * UI utility functions
+/*
+ * File Name: uiUtils.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
  */
 
-/**
- * Shows a loading indicator
- */
+// Shows a loading indicator
 export const showLoading = () => {
     const loadingIndicator = document.createElement('div');
     loadingIndicator.classList.add('loading-indicator');
@@ -12,9 +12,7 @@ export const showLoading = () => {
     document.body.appendChild(loadingIndicator);
 };
 
-/**
- * Hides the loading indicator
- */
+// Hides the loading indicator
 export const hideLoading = () => {
     const loadingIndicator = document.querySelector('.loading-indicator');
     if (loadingIndicator) {

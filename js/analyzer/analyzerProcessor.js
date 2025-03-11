@@ -1,4 +1,8 @@
-// Data processing functionality
+/*
+ * File Name: analyzerProcessor.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
 
 /**
  * Process JSON data from multiple files

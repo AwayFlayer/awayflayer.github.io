@@ -1,7 +1,10 @@
-/**
- * Chart tooltip component
+/*
+ * File Name: tooltip.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
  */
 
+// Chart tooltip component
 let tooltipInstances = new Map();
 
 /**

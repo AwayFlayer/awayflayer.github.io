@@ -1,3 +1,9 @@
+/*
+ * File Name: analyzerHandlers.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
+ */
+
 // File handling functionality
 import { processJsonData } from './analyzerProcessor.js';
 import { renderPieChart } from './charts/pieChart.js';

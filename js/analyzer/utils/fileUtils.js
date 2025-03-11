@@ -1,5 +1,7 @@
-/**
- * Utility functions for file handling
+/*
+ * File Name: fileUtils.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
  */
 
 /**

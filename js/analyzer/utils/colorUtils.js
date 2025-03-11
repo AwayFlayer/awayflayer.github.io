@@ -1,5 +1,7 @@
-/**
- * Color utility functions
+/*
+ * File Name: colorUtils.js
+ * Copyright (c) 2025 AwayFlayer
+ * License: MIT
  */
 
 /**
