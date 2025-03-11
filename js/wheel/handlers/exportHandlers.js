@@ -60,11 +60,7 @@ export const createExportHandlers = (appState) => {
     }
     
     // Export stats with metadata
-    return exportStatsData({
-      data: stats,
-      exported: new Date().toISOString(),
-      totalSpins: Object.values(stats).reduce((sum, count) => sum + count, 0)
-    });
+    return exportStatsData(stats);
   };
   
   /**
