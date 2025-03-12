@@ -10,8 +10,12 @@ export const initChartTypeToggle = () => {
     
     chartButtons.forEach(button => {
         button.addEventListener('click', () => {
+            if (button.classList.contains('active')) return;
             // Remove active class from all buttons
-            chartButtons.forEach(btn => btn.classList.remove('active'));
+            const activeButton = document.querySelector('.chart-btn.active');
+            if (activeButton) {
+                chartButtons.forEach(btn => btn.classList.remove('active'));
+            }
             
             // Add active class to clicked button
             button.classList.add('active');

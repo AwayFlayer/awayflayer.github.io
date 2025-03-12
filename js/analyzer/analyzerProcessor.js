@@ -43,7 +43,7 @@ const processArrayData = (array, result) => {
         } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
             // If array contains primitive values, count occurrences
             const key = String(item);
-            result[key] ??= 0; // Nullish coalescing assignment operator
+            result[key] ??= 0;
             result[key]++;
         }
     });
@@ -69,7 +69,7 @@ const processObjectData = (obj, result) => {
     if (hasNumericValues) {
         // If object has numeric values, add them to the result
         Object.entries(numericValues).forEach(([key, value]) => {
-            result[key] ??= 0; // Nullish coalescing assignment operator
+            result[key] ??= 0;
             result[key] += value;
         });
     } else {
@@ -84,7 +84,7 @@ const processObjectData = (obj, result) => {
                 }
             } else {
                 // Count occurrence of this key
-                result[key] ??= 0; // Nullish coalescing assignment operator
+                result[key] ??= 0;
                 result[key]++;
             }
         });

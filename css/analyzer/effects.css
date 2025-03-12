@@ -47,17 +47,6 @@
     max-width: 400px;
 }
 
-/* Error message close button */
-.error-message .close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0;
-    margin-left: auto;
-}
-
 /* Chart zoom label */
 .zoom-label {
     position: absolute;
@@ -84,7 +73,8 @@
 .zoom-btn {
     will-change: transform, background-color;
 }
- /* Chart instructions section*/
+
+/* Chart instructions section*/
 .chart-instructions {
     text-align: center;
     margin: 10px 0;

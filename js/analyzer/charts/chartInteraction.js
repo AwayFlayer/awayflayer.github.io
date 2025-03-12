@@ -199,6 +199,9 @@ export const initChartInteractions = (canvas, renderCallback, options = {}) => {
  * @param {Function} renderCallback - Function to call to re-render chart
  */
 const addZoomControls = (container, state, renderCallback) => {
+    const existingControls = document.getElementsByClassName('chart-zoom-controls');
+    Array.from(existingControls).forEach(control => control.remove());
+
     // Create zoom controls container
     const controlsContainer = document.createElement('div');
     controlsContainer.classList.add('chart-zoom-controls');

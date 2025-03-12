@@ -11,26 +11,26 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Cache-Control" content="max-age=31536000">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!---->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="awayflayer.github.io">
+    <title>Analyzer</title>
     <meta name="description" content="The Analyzer application processes JSON files and displays their content.">
     <meta name="keywords" content="AwayFlayer, Analyzer, App">
     <meta name="author" content="AwayFlayer">
-    <meta property="og:title" content="Analyzer">
-    <meta property="og:description" content="The Analyzer application processes JSON files and displays their content.">
     <meta property="og:image" content="https://www.awayflayer.github.io/assets/analyzer/page.jpg">
     <meta property="og:url" content="https://www.awayflayer.github.io/analyzer.html">
-
-    
-    <title>Analyzer</title>
-    <link rel="icon" href="assets/analyzer/favicon.ico">
-    <link rel="stylesheet" href="css/analyzer/main.css">
+    <meta property="og:title" content="Analyzer">
+    <meta property="og:description" content="The Analyzer application processes JSON files and displays their content.">
+    <!---->
+    <link rel="icon" href="assets/analyzer/favicon.ico" type="text/css">
+    <link rel="stylesheet" href="css/analyzer/main.css" type="text/css">
 </head>
-<body class="dark-mode">
+<body>
     <div class="app-container">
         <header>
             <h1>Statistics Analyzer</h1>
         </header>
-
         <!-- File upload section --> 
         <section class="file-upload-section">
             <div class="upload-container">
@@ -48,7 +48,6 @@
                 </label>
                 <input type="file" id="file-upload" accept=".json" multiple>
             </div>
-            
             <!-- Selected files section -->
             <div id="selected-files">
                 <h3>Selected Files</h3>
@@ -57,7 +56,6 @@
                 </ul>
             </div>
         </section>
-
         <!-- Visualization section -->
         <section class="visualization-section">
             <div class="chart-controls">
@@ -91,7 +89,6 @@
             </div>
             <div id="chart-legend" class="chart-legend"></div>
         </section>
-
         <!-- Data summary section -->
         <section class="data-section">
             <h2>Data Summary</h2>
@@ -100,7 +97,6 @@
             </div>
         </section>
     </div>
-
     <!-- JavaScript module section -->
     <script type="module" src="js/analyzer/main.js"></script>
 </body>

@@ -7,9 +7,8 @@
 // Bar chart rendering functionality with zoom and pan support
 import { applyViewTransformation, initChartInteractions } from './chartInteraction.js';
 
-// Global variables to store interactions and tooltip
+// Global variables to store interactions
 let interactions = null;
-let tooltip = null;
 
 /**
  * Render a bar chart on the provided canvas
@@ -24,11 +23,6 @@ export const renderBarChart = (data, canvas, viewState = null) => {
     const container = canvas.parentElement;
     canvas.width = container.clientWidth;
     canvas.height = container.clientHeight;
-    
-    // Initialize tooltip if not created yet
-    if (!tooltip) {
-        tooltip = createTooltip(container);
-    }
     
     // Check if we need to reset interactions
     if (window.resetChartInteractions === true) {
@@ -97,14 +91,14 @@ export const renderBarChart = (data, canvas, viewState = null) => {
     
     // Draw title
     ctx.font = 'bold 16px sans-serif';
-    ctx.fillStyle = isDarkMode() ? '#f5f5f5' : '#212121';
+    ctx.fillStyle = '#f5f5f5';
     ctx.textAlign = 'center';
     ctx.fillText('Bar Chart', canvas.width / 2, padding.top / 2);
     
     // Add zoom level indicator if zoomed
     if (viewState && viewState.zoomLevel !== 1) {
         ctx.font = '12px sans-serif';
-        ctx.fillStyle = isDarkMode() ? 'rgba(245, 245, 245, 0.7)' : 'rgba(33, 33, 33, 0.7)';
+        ctx.fillStyle = 'rgba(245, 245, 245, 0.7)';
         ctx.textAlign = 'left';
         ctx.fillText(`Zoom: ${Math.round(viewState.zoomLevel * 100)}%`, 10, 20);
     }
@@ -113,7 +107,7 @@ export const renderBarChart = (data, canvas, viewState = null) => {
     ctx.beginPath();
     ctx.moveTo(padding.left, padding.top);
     ctx.lineTo(padding.left, canvas.height - padding.bottom);
-    ctx.strokeStyle = isDarkMode() ? '#555' : '#999';
+    ctx.strokeStyle = '#555';
     ctx.lineWidth = 1;
     ctx.stroke();
     
@@ -135,12 +129,12 @@ export const renderBarChart = (data, canvas, viewState = null) => {
         ctx.beginPath();
         ctx.moveTo(padding.left, yPos);
         ctx.lineTo(canvas.width - padding.right, yPos);
-        ctx.strokeStyle = isDarkMode() ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
         ctx.stroke();
         
         // Y-axis label
         ctx.font = '12px sans-serif';
-        ctx.fillStyle = isDarkMode() ? '#f5f5f5' : '#212121';
+        ctx.fillStyle = '#f5f5f5';
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
         ctx.fillText(Math.round(value).toString(), padding.left - 10, yPos);
@@ -152,23 +146,13 @@ export const renderBarChart = (data, canvas, viewState = null) => {
         const xPos = padding.left + barSpacing + (index * (barWidth + barSpacing));
         const yPos = canvas.height - padding.bottom - barHeight;
         
-        // Store the bar position and size for tooltip detection
-        barsToShow[index].barData = {
-            x: xPos,
-            y: yPos,
-            width: barWidth,
-            height: barHeight,
-            key,
-            value
-        };
-        
         // Draw bar
         ctx.fillStyle = colors[index % colors.length]; // Use modulo to handle many bars
         ctx.fillRect(xPos, yPos, barWidth, barHeight);
         
         // Draw value on top of bar
         ctx.font = '12px sans-serif';
-        ctx.fillStyle = isDarkMode() ? '#f5f5f5' : '#212121';
+        ctx.fillStyle = '#f5f5f5';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'bottom';
         
@@ -202,13 +186,6 @@ export const renderBarChart = (data, canvas, viewState = null) => {
     
     // Create legend
     updateLegend(barsToShow, colors);
-    
-    // Store the data for tooltip usage
-    canvas.chartData = {
-        data: barsToShow,
-        type: 'bar',
-        canvas
-    };
 };
 
 /**
@@ -232,14 +209,6 @@ const generateColors = (count) => {
 };
 
 /**
- * Check if dark mode is active
- * @returns {boolean} - True if dark mode is active
- */
-const isDarkMode = () => {
-    return document.body.classList.contains('dark-mode');
-};
-
-/**
  * Update the legend with current data
  * @param {Array} data - Array of [key, value] pairs
  * @param {Array} colors - Array of colors used in the chart
@@ -252,7 +221,7 @@ const updateLegend = (data, colors) => {
     const maxLegendItems = 15;
     const dataToShow = data.slice(0, maxLegendItems);
     
-    dataToShow.forEach(([key, value], index) => {
+    dataToShow.forEach(([key], index) => {
         const legendItem = document.createElement('div');
         legendItem.classList.add('legend-item');
         
@@ -275,16 +244,4 @@ const updateLegend = (data, colors) => {
         moreItem.textContent = `+ ${data.length - maxLegendItems} more items`;
         legendContainer.appendChild(moreItem);
     }
-};
-
-/**
- * Create tooltip element
- * @param {HTMLElement} container - Container to append the tooltip to
- * @returns {HTMLElement} - The created tooltip element
- */
-const createTooltip = (container) => {
-    const tooltipEl = document.createElement('div');
-    tooltipEl.classList.add('chart-tooltip');
-    container.appendChild(tooltipEl);
-    return tooltipEl;
 };

@@ -27,13 +27,8 @@ export const hideLoading = () => {
 export const showError = (message) => {
     const errorMessage = document.createElement('div');
     errorMessage.classList.add('error-message');
-    errorMessage.innerHTML = `<p>${message}</p><button type="button" class="close-btn">✕</button>`;
+    errorMessage.innerHTML = `<p>${message}</p>`;
     document.body.appendChild(errorMessage);
-    
-    // Add close button functionality
-    errorMessage.querySelector('.close-btn').addEventListener('click', () => {
-        errorMessage.remove();
-    });
     
     // Auto-hide after 10 seconds
     setTimeout(() => {

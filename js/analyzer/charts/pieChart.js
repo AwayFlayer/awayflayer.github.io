@@ -7,9 +7,8 @@
 // Pie chart rendering functionality with zoom and pan support
 import { applyViewTransformation, initChartInteractions } from './chartInteraction.js';
 
-// Global variables to store interactions and tooltip
+// Global variables to store interactions
 let interactions = null;
-let tooltip = null;
 
 /**
  * Render a pie chart on the provided canvas
@@ -24,11 +23,6 @@ export const renderPieChart = (data, canvas, viewState = null) => {
     const container = canvas.parentElement;
     canvas.width = container.clientWidth;
     canvas.height = container.clientHeight;
-    
-    // Initialize tooltip if not created yet
-    if (!tooltip) {
-        tooltip = createTooltip(container);
-    }
     
     // Check if we need to reset interactions
     if (window.resetChartInteractions === true) {
@@ -80,23 +74,11 @@ export const renderPieChart = (data, canvas, viewState = null) => {
     // Sort data to make the pie chart more stable visually
     const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
     
-    // Store the segments data for tooltip detection
-    const segments = [];
-    
     // Draw pie slices
     let startAngle = -Math.PI / 2; // Start from the top (12 o'clock position)
     
     sortedData.forEach(([key, value], index) => {
         const sliceAngle = (value / total) * (Math.PI * 2);
-        
-        // Store segment data for tooltip detection
-        segments.push({
-            key,
-            value,
-            startAngle,
-            endAngle: startAngle + sliceAngle,
-            color: colors[index]
-        });
         
         // Draw slice
         ctx.beginPath();
@@ -109,7 +91,7 @@ export const renderPieChart = (data, canvas, viewState = null) => {
         ctx.fill();
         
         // Draw slice border
-        ctx.strokeStyle = isDarkMode() ? '#121212' : '#ffffff';
+        ctx.strokeStyle = '#121212';
         ctx.lineWidth = 2;
         ctx.stroke();
         
@@ -140,14 +122,14 @@ export const renderPieChart = (data, canvas, viewState = null) => {
     // Add zoom level indicator if zoomed
     if (viewState && viewState.zoomLevel !== 1) {
         ctx.font = '12px sans-serif';
-        ctx.fillStyle = isDarkMode() ? 'rgba(245, 245, 245, 0.7)' : 'rgba(33, 33, 33, 0.7)';
+        ctx.fillStyle = 'rgba(245, 245, 245, 0.7)';
         ctx.textAlign = 'left';
         ctx.fillText(`Zoom: ${Math.round(viewState.zoomLevel * 100)}%`, 10, 20);
     }
     
     // Draw title
     ctx.font = 'bold 16px sans-serif';
-    ctx.fillStyle = isDarkMode() ? '#f5f5f5' : '#212121';
+    ctx.fillStyle = '#f5f5f5';
     ctx.textAlign = 'center';
     ctx.fillText('Pie Chart', canvas.width / 2, 25);
     
@@ -158,16 +140,6 @@ export const renderPieChart = (data, canvas, viewState = null) => {
     
     // Create legend items
     updateLegend(sortedData, colors);
-    
-    // Store the data for tooltip usage
-    canvas.chartData = {
-        data: sortedData,
-        segments,
-        type: 'pie',
-        centerX,
-        centerY,
-        radius
-    };
 };
 
 /**
@@ -187,14 +159,6 @@ const generateColors = (count) => {
     }
     
     return colors;
-};
-
-/**
- * Check if dark mode is active
- * @returns {boolean} - True if dark mode is active
- */
-const isDarkMode = () => {
-    return document.body.classList.contains('dark-mode');
 };
 
 /**
@@ -257,7 +221,7 @@ const updateLegend = (data, colors) => {
     const legendContainer = document.getElementById('chart-legend');
     legendContainer.innerHTML = '';
     
-    data.forEach(([key, value], index) => {
+    data.forEach(([key], index) => {
         const legendItem = document.createElement('div');
         legendItem.classList.add('legend-item');
         
@@ -272,16 +236,4 @@ const updateLegend = (data, colors) => {
         legendItem.appendChild(label);
         legendContainer.appendChild(legendItem);
     });
-};
-
-/**
- * Create tooltip element
- * @param {HTMLElement} container - Container to append the tooltip to
- * @returns {HTMLElement} - The created tooltip element
- */
-const createTooltip = (container) => {
-    const tooltipEl = document.createElement('div');
-    tooltipEl.classList.add('chart-tooltip');
-    container.appendChild(tooltipEl);
-    return tooltipEl;
 };

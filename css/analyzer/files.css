@@ -64,6 +64,7 @@
     text-align: center;
     font-style: italic;
     color: #999;
+    cursor: not-allowed;
 }
 
 /* File list section */
@@ -88,7 +89,6 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #f44336;
 }
 
 .file-remove:hover {

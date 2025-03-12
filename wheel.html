@@ -11,17 +11,18 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Cache-Control" content="max-age=31536000">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!---->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="awayflayer.github.io">
+    <title>Wheel</title>
     <meta name="description" content="The Wheel application is wheel game where users can add a pool of options and spin to randomly select an outcome.">
     <meta name="keywords" content="AwayFlayer, Wheel, App">
+    <meta property="og:image" content="https://www.awayflayer.github.io/assets/wheel/page.jpg">
+    <meta property="og:url" content="https://www.awayflayer.github.io/wheel.html">
     <meta name="author" content="AwayFlayer">
     <meta property="og:title" content="Wheel">
     <meta property="og:description" content="The Wheel application is wheel game where users can add a pool of options and spin to randomly select an outcome.">
-    <meta property="og:image" content="https://www.awayflayer.github.io/assets/wheel/page.jpg">
-    <meta property="og:url" content="https://www.awayflayer.github.io/wheel.html">
-
-    
-    <title>Wheel</title>
+    <!---->
     <link rel="icon" href="assets/wheel/favicon.ico">
     <link rel="stylesheet" href="css/wheel/main.css">
 </head>
@@ -30,13 +31,11 @@
         <h1>Wheel</h1>
     </header>
     <main>
-
         <!-- Wheel container section -->
         <section id="wheelContainer">
             <div id="pointer" role="region" aria-label="Wheel Pointer"></div>
             <canvas id="wheelCanvas" aria-label="Spinning Wheel"></canvas>
         </section>
-
         <!-- Control panel section -->
         <section class="controlPanel">
             <input type="text" id="optionInput" placeholder="New Option" aria-label="Input Option">
@@ -48,7 +47,6 @@
             <label for="enableIntegrationToggle">Integration</label>
             <input type="checkbox" id="enableIntegrationToggle" checked>
         </section>
-
         <!-- Import panel section -->
         <section id="importPanel" hidden>
             <h2>Import Wheel</h2>
@@ -67,7 +65,6 @@
             <div id="fileNameDisplay"></div>
             <button type="button" id="importBtn">Upload</button>
         </section>
-
         <!-- Option list section -->
         <section id="optionsListContainer">
             <h2>Current Options List:</h2>
@@ -78,7 +75,6 @@
     <div id="resultModal" hidden>
         <div id="modalContent"></div>
     </div>
-
     <!-- JavaScript module section -->
     <script type="module" src="js/wheel/main.js"></script>
 </body>

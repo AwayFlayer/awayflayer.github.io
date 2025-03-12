@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
         console.error('Error initializing application:', error);
         
+        const existingError = document.getElementsByClassName('error-banner');
+        Array.from(existingError).forEach(control => control.remove());
+
         // Show error message on the page
         const errorMsg = document.createElement('div');
         errorMsg.className = 'error-banner';

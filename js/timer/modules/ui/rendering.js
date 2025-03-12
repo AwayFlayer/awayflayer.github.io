@@ -98,7 +98,6 @@ const createTimerRow = (timerObj, originalIndex, liveMode) => {
         timerRow.classList.add('timer-ending');
     }
     
-    // Użycie zaimportowanej funkcji formatTime zamiast metody obiektu
     const formattedTime = timer.formatTime(timerObj.time);
     
     // Format the timer text with line breaks if needed
@@ -117,13 +116,28 @@ const createTimerRow = (timerObj, originalIndex, liveMode) => {
         editBtn.type = 'button';
         editBtn.className = 'action-btn edit';
         editBtn.dataset.index = originalIndex;
-        editBtn.textContent = 'Edit';
+        editBtn.innerHTML = `
+            <svg width='20' height='20' viewBox='0 0 20 20'>
+                <path d='M2 18 L5 15 L15 5 L18 8 L8 18 L2 18 Z' fill='blueviolet' stroke='black' />
+                <path d='M14 4 L16 6 L18 4 L16 2 Z' fill='blueviolet' stroke='black' />
+            </svg>
+        `;
+        editBtn.title = "edit";
         
         const deleteBtn = document.createElement('button');
         deleteBtn.type = 'button';
         deleteBtn.className = 'action-btn delete';
         deleteBtn.dataset.index = originalIndex;
-        deleteBtn.textContent = 'Delete';
+        deleteBtn.innerHTML = `
+            <svg width='16' height='16' viewBox='0 0 16 16'>
+                <rect width='8' height='10' x='4' y='5' rx='1' ry='1' fill='red' stroke='black' />
+                <rect width='12' height='2' x='2' y='2' rx='1' ry='1' fill='red' stroke='black' />
+                <line x1='6' y1='7' x2='6' y2='14' stroke='black' />
+                <line x1='8' y1='7' x2='8' y2='14' stroke='black' />
+                <line x1='10' y1='7' x2='10' y2='14' stroke='black' />
+            </svg>
+        `;
+        deleteBtn.title = "delete";
         
         timerActions.appendChild(editBtn);
         timerActions.appendChild(deleteBtn);

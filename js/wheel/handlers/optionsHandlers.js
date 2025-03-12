@@ -109,7 +109,7 @@ export const createOptionsHandlers = (appState, renderWheel, renderOptionsList) 
     localStorage.removeItem("stats");
     
     // Redirect to clean state
-    location.href = 'wheel.html';
+    location.href = './wheel.html';
     return true;
   };
   

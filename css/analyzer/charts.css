@@ -37,6 +37,7 @@
 .chart-btn.active {
     background-color: var(--primary-color);
     color: white;
+    cursor: not-allowed;
 }
 
 /* Chart section */

@@ -6,7 +6,6 @@
 
 // Main application entry point
 import { createAppState } from './core/state.js';
-import { updateUrlWithOptions } from './utils/urlUtils.js';
 import { createWheelRenderer, resizeCanvas } from './ui/wheelRenderer.js';
 import { createOptionsListRenderer } from './ui/optionsListRenderer.js';
 import { createModalManager } from './ui/modalManager.js';

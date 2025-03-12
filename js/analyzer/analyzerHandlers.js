@@ -66,7 +66,7 @@ export const initFileHandler = () => {
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <span>${file.name}</span>
-                    <button type="button" class="file-remove" data-index="${index}"><svg width='24' height='24' viewBox='0 0 16 16'>
+                    <button type="button" title="Remove file" class="file-remove" data-index="${index}"><svg width='24' height='24' viewBox='0 0 16 16'>
                     <rect width='8' height='10' x='4' y='5' rx='1' ry='1' fill='red' stroke='black' />
                     <rect width='12' height='2' x='2' y='2' rx='1' ry='1' fill='red' stroke='black' />
                     <line x1='6' y1='7' x2='6' y2='14' stroke='black' />
@@ -97,8 +97,7 @@ export const initFileHandler = () => {
         if (files.length > 0) {
             processFiles();
         } else {
-            // If no files left, clear the chart and data summary
-            //clearVisualization();
+            // If no files left
             location.href = "./analyzer.html";
         }
     };
@@ -227,6 +226,11 @@ export const initFileHandler = () => {
         });
         
         tableHTML += `
+                <tr>
+                    <td><strong>SUMMARY</strong></td>
+                    <td><strong>${total}</strong></td>
+                    <td><strong>100%</strong></td>
+                </tr>
                 </tbody>
             </table>
         `;
@@ -250,7 +254,6 @@ export const initFileHandler = () => {
         }
         
         // Reset global chart interaction variables in the chart modules
-        // This is crucial - we need to tell the modules to reinitialize
         window.resetChartInteractions = true;
         
         // Update visualization if we have data
@@ -259,6 +262,5 @@ export const initFileHandler = () => {
         }
     };
 
-    // Inicjalizuj widok
     updateFileList();
 };

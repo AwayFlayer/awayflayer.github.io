@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import * as storage from '../storage.js';
-import * as timerFunctions from '../timer.js';
 import { renderTimers, isLiveMode } from './rendering.js';
 import { initEventHandlers, getState } from './events.js';
 

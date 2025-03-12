@@ -11,23 +11,24 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Cache-Control" content="max-age=31536000">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!---->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="awayflayer.github.io">
+    <title>Timer</title>
     <meta name="description" content="The Timer application is a versatile and user-friendly tool designed to help users keep track of time efficiently.">
     <meta name="keywords" content="AwayFlayer, Timer, App">
     <meta name="author" content="AwayFlayer">
-    <meta property="og:title" content="Analyzer">
-    <meta property="og:description" content="The Timer application is a versatile and user-friendly tool designed to help users keep track of time efficiently.">
     <meta property="og:image" content="https://www.awayflayer.github.io/assets/timer/page.jpg">
     <meta property="og:url" content="https://www.awayflayer.github.io/timer.html">
-
-    <title>Timer</title>
+    <meta property="og:title" content="Analyzer">
+    <meta property="og:description" content="The Timer application is a versatile and user-friendly tool designed to help users keep track of time efficiently.">
+    <!---->
     <link rel="icon" href="assets/timer/favicon.ico">
     <link rel="stylesheet" href="css/timer/main.css">
 </head>
 <body>
     <main class="container">
         <h1>Timer</h1>
-
         <!-- Control buttons section -->
         <section class="control-buttons" id="controlButtons">
             <button type="button" id="startStopBtn" class="btn start">Start</button>
@@ -36,14 +37,12 @@
             <button type="button" id="importBtn" class="btn">Import</button>
             <input type="file" id="importFile" accept=".json" class="hidden-input" title="Import File" placeholder="Select a file">
         </section>
-        
         <!-- Timers section -->
         <section class="timers-container-wrapper">
             <div class="timers-container" id="timersContainer">
             </div>
         </section>
     </main>
-    
     <!-- JavaScript module section -->
     <script type="module" src="js/timer/main.js"></script>
 </body>

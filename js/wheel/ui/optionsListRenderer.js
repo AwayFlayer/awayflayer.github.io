@@ -58,10 +58,10 @@ export const createOptionsListRenderer = (listContainer, onEdit, onDelete) => {
       "editButton",
       () => onEdit(optionText, index)
     );
-    editBtn.insertAdjacentHTML('afterbegin', `<svg width='20' height='20' viewBox='0 0 20 20'>
+    editBtn.innerHTML = `<svg width='20' height='20' viewBox='0 0 20 20'>
       <path d='M2 18 L5 15 L15 5 L18 8 L8 18 L2 18 Z' fill='blueviolet' stroke='black' />
       <path d='M14 4 L16 6 L18 4 L16 2 Z' fill='blueviolet' stroke='black' />
-    </svg>`);
+    </svg>`;
     fragment.appendChild(editBtn);
     
     // Create delete button
@@ -71,13 +71,13 @@ export const createOptionsListRenderer = (listContainer, onEdit, onDelete) => {
       "deleteButton",
       () => onDelete(index)
     );
-    deleteBtn.insertAdjacentHTML('afterbegin', `<svg width='16' height='16' viewBox='0 0 16 16'>
+    deleteBtn.innerHTML = `<svg width='16' height='16' viewBox='0 0 16 16'>
       <rect width='8' height='10' x='4' y='5' rx='1' ry='1' fill='red' stroke='black' />
       <rect width='12' height='2' x='2' y='2' rx='1' ry='1' fill='red' stroke='black' />
       <line x1='6' y1='7' x2='6' y2='14' stroke='black' />
       <line x1='8' y1='7' x2='8' y2='14' stroke='black' />
       <line x1='10' y1='7' x2='10' y2='14' stroke='black' />
-    </svg>`);
+    </svg>`;
     fragment.appendChild(deleteBtn);
     
     // Add all elements to list item

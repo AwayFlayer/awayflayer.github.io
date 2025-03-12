@@ -29,14 +29,3 @@ export const formatTime = (seconds) => {
     
     return parts.join(':');
 };
-
-/**
- * Calculate progress percentage
- * @param {Number} currentTime - Current time in seconds
- * @param {Number} totalTime - Total time in seconds
- * @returns {Number} Progress percentage (0-100)
- */
-export const calculateProgress = (currentTime, totalTime) => {
-    if (!totalTime) return 0;
-    return Math.max(0, Math.min(100, (currentTime / totalTime) * 100));
-};
