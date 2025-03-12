@@ -27,7 +27,7 @@ export const hideLoading = () => {
 export const showError = (message) => {
     const errorMessage = document.createElement('div');
     errorMessage.classList.add('error-message');
-    errorMessage.innerHTML = `<p>${message}</p><button class="close-btn">✕</button>`;
+    errorMessage.innerHTML = `<p>${message}</p><button type="button" class="close-btn">✕</button>`;
     document.body.appendChild(errorMessage);
     
     // Add close button functionality

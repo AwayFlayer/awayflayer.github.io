@@ -17,7 +17,7 @@
   align-items: center;
   z-index: 300;
 }
-  
+
 .custom-alert-content {
   background-color: white;
   padding: var(--spacing-lg);
@@ -27,12 +27,12 @@
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-  
+
 .custom-alert-message {
   margin-bottom: var(--spacing-lg);
   font-size: var(--font-size-medium);
 }
- 
+
 /* Result alrt buttons section */
 .custom-alert-button {
   background-color: var(--primary-color);
@@ -44,7 +44,7 @@
   cursor: pointer;
   transition: background-color 0.2s;
 }
-  
+
 .custom-alert-button:hover {
   background-color: #2980b9;
 }

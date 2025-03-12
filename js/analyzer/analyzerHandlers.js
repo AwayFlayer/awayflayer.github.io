@@ -66,8 +66,13 @@ export const initFileHandler = () => {
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <span>${file.name}</span>
-                    <button class="file-remove" data-index="${index}">✕</button>
-                `;
+                    <button type="button" class="file-remove" data-index="${index}"><svg width='24' height='24' viewBox='0 0 16 16'>
+                    <rect width='8' height='10' x='4' y='5' rx='1' ry='1' fill='red' stroke='black' />
+                    <rect width='12' height='2' x='2' y='2' rx='1' ry='1' fill='red' stroke='black' />
+                    <line x1='6' y1='7' x2='6' y2='14' stroke='black' />
+                    <line x1='8' y1='7' x2='8' y2='14' stroke='black' />
+                    <line x1='10' y1='7' x2='10' y2='14' stroke='black' />
+                    </svg></button>`;
                 fileList.appendChild(li);
             });
             

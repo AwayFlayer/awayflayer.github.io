@@ -90,3 +90,7 @@
     cursor: pointer;
     color: #f44336;
 }
+
+.file-remove:hover {
+    transform: scale(1.2);
+}

@@ -11,7 +11,7 @@
   max-width: 500px;
   margin: 0 auto var(--space-lg);
 }
-  
+
 #wheelCanvas {
   width: 100%;
   height: auto;
@@ -20,7 +20,7 @@
   transition: transform var(--transition-normal) ease;
   filter: drop-shadow(0 0 8px rgba(108, 92, 231, 0.4));
 }
-  
+
 #pointer {
   position: absolute;
   top: -10px;
@@ -34,7 +34,7 @@
   z-index: 10;
   filter: drop-shadow(0 0 5px var(--accent-light));
 }
-  
+
 /* Control panel section */
 .controlPanel {
   width: 100%;
@@ -62,14 +62,14 @@
   font-size: var(--font-size-md);
   transition: all var(--transition-fast) ease;
 }
-  
+
 #optionInput:focus {
   outline: none;
   border-color: var(--primary-color);
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.3);
 }
-  
+
 #optionInput::placeholder {
   color: var(--text-secondary);
   opacity: 0.7;
@@ -85,11 +85,11 @@
   box-shadow: 0 4px 12px var(--shadow-color);
   border: 1px solid var(--border-color);
 }
-  
+
 #optionsList {
   list-style: none;
 }
-  
+
 #optionsList li {
   display: flex;
   align-items: center;
@@ -97,26 +97,26 @@
   border-bottom: 1px solid var(--border-color);
   transition: background-color var(--transition-fast) ease;
 }
-  
+
 #optionsList li:hover {
   background-color: rgba(255, 255, 255, 0.03);
 }
-  
+
 #optionsList li:last-child {
   border-bottom: none;
 }
-  
+
 #optionsList li strong {
   margin-right: var(--space-sm);
   color: var(--primary-light);
   font-weight: 600;
 }
-  
+
 #optionsList li span {
   flex: 1;
   color: var(--text-primary);
 }
-  
+
 /* Result modal section */
 #resultModal {
   display: none;
@@ -132,7 +132,7 @@
   align-items: center;
   z-index: 100;
 }
-  
+
 #modalContent {
   background-color: var(--background-card);
   padding: var(--space-xl);
@@ -145,7 +145,7 @@
   gap: var(--space-md);
   border: 1px solid var(--primary-color);
 }
-  
+
 /* Checkbox styling section */
 input[type="checkbox"] {
   margin-left: var(--space-sm);
@@ -159,12 +159,12 @@ input[type="checkbox"] {
   cursor: pointer;
   vertical-align: middle;
 }
-  
+
 input[type="checkbox"]:checked {
   background-color: var(--primary-color);
   border-color: var(--primary-light);
 }
-  
+
 input[type="checkbox"]:checked::after {
   content: '';
   position: absolute;
@@ -176,7 +176,7 @@ input[type="checkbox"]:checked::after {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
-  
+
 /* Label styles section */
 label {
   color: var(--text-primary);

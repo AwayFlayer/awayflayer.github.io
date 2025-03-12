@@ -15,29 +15,27 @@
     text-align: center;
     border: 1px solid var(--border-color);
 }
-  
+
 #importPanel h2 {
     margin-bottom: var(--space-md);
 }
-  
+
 #importPanel label {
     display: inline-block;
     padding: var(--space-sm) var(--space-lg);
     margin: var(--space-md);
-    background-color: var(--primary-color);
     color: white;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all var(--transition-fast) ease;
-    border: 1px solid var(--primary-light);
 }
-  
+
 #importPanel label:hover {
     background-color: var(--primary-light);
     transform: translateY(-2px);
     box-shadow: 0 5px 10px var(--shadow-light);
 }
-  
+
 #jsonFileInput {
     width: 0.1px;
     height: 0.1px;
@@ -47,7 +45,7 @@
     z-index: -1;
 }
 
-/* Special button styling for import button */
+/* Special button styling for import button section */
 #importBtn {
     position: relative;
     overflow: hidden;

@@ -1,5 +1,5 @@
 /*
- * File Name: buttons.css
+ * File Name: controlButtons.css
  * Copyright (c) 2025 AwayFlayer
  * License: MIT
  */
@@ -10,14 +10,14 @@
     background: linear-gradient(135deg, #6c5ce7, #4834d4);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-  
+
 #addOptionBtn:hover,
 #importBtn:hover {
     background: linear-gradient(135deg, #7d6ded, #5842e3);
     transform: translateY(-3px);
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2), 0 0 10px rgba(108, 92, 231, 0.3);
 }
-  
+
 /* Spin button with animated glow effect section */
 #startSpinBtn {
     background: linear-gradient(135deg, #00b894, #00a884);
@@ -32,19 +32,19 @@
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 0 10px rgba(0, 184, 148, 0.3);
     animation: none;
 }
-  
+
 /* Reset button section */
 #resetWheelBtn {
     background: linear-gradient(135deg, #ff7675, #e84c3d);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-  
+
 #resetWheelBtn:hover {
     background: linear-gradient(135deg, #ff8a89, #f15a4b);
     transform: translateY(-3px);
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 0 10px rgba(255, 118, 117, 0.3);
 }
-  
+
 /* Export buttons section */
 #exportWheelBtn,
 #exportStatsBtn {
@@ -53,7 +53,7 @@
     font-weight: 700;
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
-  
+
 #exportWheelBtn:hover,
 #exportStatsBtn:hover {
     background: linear-gradient(135deg, #ffd77f, #f0bc55);

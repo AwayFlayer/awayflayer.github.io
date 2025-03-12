@@ -13,6 +13,7 @@ import { createModalManager } from './ui/modalManager.js';
 import { createOptionsHandlers } from './handlers/optionsHandlers.js';
 import { createSpinHandler } from './handlers/wheelHandlers.js';
 import { createExportHandlers } from './handlers/exportHandlers.js';
+import { displayFileName } from './handlers/fileHandlers.js';
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
@@ -78,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('jsonFileInput');
     exportHandlers.importWheel(fileInput.files[0]);
   });
+
+  document.getElementById('jsonFileInput').addEventListener('change', displayFileName);
   
   // Enable integration toggle
   document.getElementById('enableIntegrationToggle').addEventListener('change', (e) => {
