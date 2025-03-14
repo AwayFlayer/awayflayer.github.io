@@ -20,7 +20,7 @@ body {
     color: var(--text-light);
 }
 
-h1, h2, h3 {
+h1, h2, #selected-files p {
     font-weight: 600;
     line-height: 1.2;
 }

@@ -24,7 +24,7 @@ export const renderBarChart = async (data, canvas, viewState = null) => {
     if (!interactions) {
         interactions = await initChartInteractions(canvas, async (state) => {
             await renderBarChart(data, canvas, state);
-        }, { chartType: 'bar', minZoom: 0.5, maxZoom: 5 });
+        }, {chartType: 'bar', minZoom: 0.5, maxZoom: 5});
     }
 
     const padding = {
@@ -155,7 +155,7 @@ const generateColors = (count) => {
     const saturation = 65;
     const lightness = 50;
 
-    return Array.from({ length: count }, (_, i) => {
+    return Array.from({length: count}, (_, i) => {
         const hue = (baseHue + (i * 360 / Math.min(count, 20))) % 360;
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     });

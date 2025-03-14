@@ -14,7 +14,7 @@ export const readFileAsJson = async (file) => {
             reader.readAsText(file);
         });
         const data = JSON.parse(result ?? '');
-        return { name: file.name, data };
+        return {name: file.name, data};
     } catch (error) {
         console.error(`Invalid JSON in file: ${file.name}`);
         alert(`Invalid JSON in file: ${file.name}`);

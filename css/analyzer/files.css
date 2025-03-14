@@ -44,7 +44,7 @@
     display: none;
 }
 
-.selected-files {
+#selected-files {
     margin-top: 1rem;
 }
 

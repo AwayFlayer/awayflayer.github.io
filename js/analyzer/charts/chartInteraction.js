@@ -40,7 +40,7 @@ export const initChartInteractions = (canvas, renderCallback, options = {}) => {
         state.offsetY = mouseY - (mouseY - state.offsetY) * (newZoom / state.zoomLevel);
         state.zoomLevel = newZoom;
 
-        renderCallback({ ...state, preserveChartType: true });
+        renderCallback({...state, preserveChartType: true});
     };
 
     const handleMouseDown = (e) => {
@@ -60,7 +60,7 @@ export const initChartInteractions = (canvas, renderCallback, options = {}) => {
         state.offsetX += deltaX;
         state.offsetY += deltaY;
 
-        renderCallback({ ...state, preserveChartType: true });
+        renderCallback({...state, preserveChartType: true});
     };
 
     const handleMouseUp = () => {
@@ -93,7 +93,7 @@ export const initChartInteractions = (canvas, renderCallback, options = {}) => {
             state.offsetX += deltaX;
             state.offsetY += deltaY;
 
-            renderCallback({ ...state, preserveChartType: true });
+            renderCallback({...state, preserveChartType: true});
         } else if (state.isPinching && e.touches.length === 2) {
             e.preventDefault();
             const currentDistance = getPinchDistance(e);
@@ -112,7 +112,7 @@ export const initChartInteractions = (canvas, renderCallback, options = {}) => {
             state.offsetY = pinchCenterY - (pinchCenterY - state.offsetY) * zoomFactor;
 
             state.zoomLevel = newZoom;
-            renderCallback({ ...state, preserveChartType: true });
+            renderCallback({...state, preserveChartType: true});
         }
     };
 
@@ -135,28 +135,28 @@ export const initChartInteractions = (canvas, renderCallback, options = {}) => {
         state.zoomLevel = 1;
         state.offsetX = 0;
         state.offsetY = 0;
-        renderCallback({ ...state, preserveChartType: true });
+        renderCallback({...state, preserveChartType: true});
     };
 
     addZoomControls(canvas.parentElement, state, renderCallback);
 
-    canvas.addEventListener('wheel', handleWheel, { passive: false });
+    canvas.addEventListener('wheel', handleWheel, {passive: false});
     canvas.addEventListener('mousedown', handleMouseDown);
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseup', handleMouseUp);
     canvas.addEventListener('mouseleave', handleMouseUp);
 
-    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
-    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-    canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
+    canvas.addEventListener('touchstart', handleTouchStart, {passive: true});
+    canvas.addEventListener('touchmove', handleTouchMove, {passive: false});
+    canvas.addEventListener('touchend', handleTouchEnd, {passive: true});
     canvas.addEventListener('dblclick', resetZoom);
 
     return {
-        getState: () => ({ ...state }),
+        getState: () => ({...state}),
         reset: resetZoom,
         setOptions: (newOptions) => {
             Object.assign(state, newOptions);
-            renderCallback({ ...state, preserveChartType: true });
+            renderCallback({...state, preserveChartType: true});
         },
         setChartType: (type) => {
             state.chartType = type;
@@ -200,7 +200,7 @@ const addZoomControls = (container, state, renderCallback) => {
         "Zoom in",
         () => {
             state.zoomLevel = Math.min(state.maxZoom, state.zoomLevel * 1.2);
-            renderCallback({ ...state, preserveChartType: true });
+            renderCallback({...state, preserveChartType: true});
         }
     );
 
@@ -209,7 +209,7 @@ const addZoomControls = (container, state, renderCallback) => {
         "Zoom out",
         () => {
             state.zoomLevel = Math.max(state.minZoom, state.zoomLevel / 1.2);
-            renderCallback({ ...state, preserveChartType: true });
+            renderCallback({...state, preserveChartType: true});
         }
     );
 
@@ -220,7 +220,7 @@ const addZoomControls = (container, state, renderCallback) => {
             state.zoomLevel = 1;
             state.offsetX = 0;
             state.offsetY = 0;
-            renderCallback({ ...state, preserveChartType: true });
+            renderCallback({...state, preserveChartType: true});
         }
     );
 
@@ -240,7 +240,7 @@ export {addZoomControls};
  * @returns {Function} - Function to restore the context
  */
 export const applyViewTransformation = (ctx, state) => {
-    const { zoomLevel, offsetX, offsetY } = state;
+    const {zoomLevel, offsetX, offsetY} = state;
 
     ctx.save();
     ctx.translate(offsetX, offsetY);
