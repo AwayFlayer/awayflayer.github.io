@@ -1,30 +1,26 @@
-<!--
-  -- File Name: analyzer.html
-  -- Copyright (c) 2025 AwayFlayer
-  -- License: MIT
-  -->
+<!-- Copyright (c) 2025 AwayFlayer -- License: MIT -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Cache-Control" content="max-age=31536000">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff"/>
+    <meta http-equiv="Cache-Control" content="max-age=31536000"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!---->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="awayflayer.github.io">
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="awayflayer.github.io"/>
     <title>Analyzer</title>
-    <meta name="description" content="The Analyzer application processes JSON files and displays their content.">
-    <meta name="keywords" content="AwayFlayer, Analyzer, App">
-    <meta name="author" content="AwayFlayer">
-    <meta property="og:image" content="https://www.awayflayer.github.io/assets/analyzer/page.jpg">
-    <meta property="og:url" content="https://www.awayflayer.github.io/analyzer.html">
-    <meta property="og:title" content="Analyzer">
-    <meta property="og:description" content="The Analyzer application processes JSON files and displays their content.">
+    <meta name="description" content="The Analyzer application processes JSON files and displays their content."/>
+    <meta name="keywords" content="AwayFlayer, Analyzer, App"/>
+    <meta name="author" content="AwayFlayer"/>
+    <meta property="og:image" content="https://www.awayflayer.github.io/assets/analyzer/page.jpg"/>
+    <meta property="og:url" content="https://www.awayflayer.github.io/analyzer.html"/>
+    <meta property="og:title" content="Analyzer"/>
+    <meta property="og:description" content="The Analyzer application processes JSON files and displays their content."/>
     <!---->
-    <link rel="icon" href="assets/analyzer/favicon.ico" type="text/css">
-    <link rel="stylesheet" href="css/analyzer/main.css" type="text/css">
+    <link rel="icon" href="assets/analyzer/favicon.ico"/>
+    <link rel="stylesheet" href="css/analyzer/main.css"/>
 </head>
 <body>
     <div class="app-container">
@@ -46,7 +42,7 @@
                     </svg>                    
                     <span>Choose JSON Files</span>
                 </label>
-                <input type="file" id="file-upload" accept=".json" multiple>
+                <input type="file" id="file-upload" accept=".json" multiple/>
             </div>
             <!-- Selected files section -->
             <div id="selected-files">
@@ -63,16 +59,16 @@
                 <div class="chart-type-toggles">
                     <button type="button" id="pie-chart-btn" class="chart-btn active" data-chart-type="pie">
                         <svg width="16" height="16" viewBox="0 0 32 32">
-                            <circle cx="16" cy="16" r="16" fill="#fff" />
-                            <path d="M16,0 A16,16 0 1,1 0,16 L16,16 Z" fill="#fff" />
+                            <circle cx="16" cy="16" r="16" fill="#fff"/>
+                            <path d="M16,0 A16,16 0 1,1 0,16 L16,16 Z" fill="#fff"/>
                         </svg>
                         <span>Pie Chart</span>
                     </button>
                     <button type="button" id="bar-chart-btn" class="chart-btn" data-chart-type="bar">
                         <svg width="16" height="16" viewBox="0 0 32 32">
-                            <rect x="4" y="20" width="4" height="8" fill="#fff" />
-                            <rect x="12" y="12" width="4" height="16" fill="#fff" />
-                            <rect x="20" y="8" width="4" height="20" fill="#fff" />
+                            <rect x="4" y="20" width="4" height="8" fill="#fff"/>
+                            <rect x="12" y="12" width="4" height="16" fill="#fff"/>
+                            <rect x="20" y="8" width="4" height="20" fill="#fff"/>
                         </svg>
                         <span>Bar Chart</span>
                     </button>

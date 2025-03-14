@@ -1,16 +1,10 @@
-/*
- * File Name: zoom.css
- * Copyright (c) 2025 AwayFlayer
- * License: MIT
- */
+/* Copyright (c) 2025 AwayFlayer ** License: MIT */
 
-/* Chart cotainer section */
 .chart-container {
     position: relative;
     cursor: grab;
 }
 
-/* Zoom controls section */
 .chart-zoom-controls {
     position: absolute;
     top: 10px;
@@ -25,12 +19,10 @@
     transition: opacity 0.3s ease;
 }
 
-/* Chart zoom controls :hover section */
 .chart-zoom-controls:hover {
     opacity: 1;
 }
 
-/* Zoom buttons section */
 .zoom-btn {
     display: flex;
     align-items: center;
@@ -45,17 +37,14 @@
     transition: all 0.2s ease;
 }
 
-/* Zoom button :hover section */
 .zoom-btn:hover {
     background: var(--primary-dark);
 }
 
-/*  Zoom button SVG section */
 .zoom-btn svg {
     fill: var(--text-light);
 }
 
-/* Zoom label section */
 .zoom-label {
     position: absolute;
     bottom: 10px;
@@ -70,13 +59,11 @@
     transition: opacity 0.3s ease;
 }
 
-/* Chart container section*/
 .chart-container:hover .zoom-label,
 .chart-container.is-zoomed .zoom-label {
     opacity: 0.7;
 }
 
-/* Add visual feedback when dragging */
 .chart-container.is-dragging {
     cursor: grabbing;
 }

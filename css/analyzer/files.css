@@ -1,10 +1,5 @@
-/*
- * File Name: files.css
- * Copyright (c) 2025 AwayFlayer
- * License: MIT
- */
+/* Copyright (c) 2025 AwayFlayer ** License: MIT */
 
- /* File upload section */
 .file-upload-section {
     margin-bottom: 2.5rem;
     padding: 1.5rem;
@@ -14,7 +9,6 @@
     transition: var(--transition);
 }
 
-/* Upload container section */
 .upload-container {
     display: flex;
     flex-direction: column;
@@ -22,7 +16,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* File upload label section */
 .file-upload-label {
     display: flex;
     flex-direction: column;
@@ -37,29 +30,24 @@
     transition: var(--transition);
 }
 
-/* File upload label :hover section */
 .file-upload-label:hover {
     border-color: var(--primary-color);
 }
 
-/* Upload icon section */
 .upload-icon {
     width: 48px;
     height: 48px;
     fill: var(--primary-color);
 }
 
-/* File upload section */
 #file-upload {
     display: none;
 }
 
-/* Selected files section */
 .selected-files {
     margin-top: 1rem;
 }
 
-/* Message if files not selected */
 .empty-message {
     text-align: center;
     font-style: italic;
@@ -67,13 +55,11 @@
     cursor: not-allowed;
 }
 
-/* File list section */
 #file-list {
     list-style: none;
     margin-top: 1rem;
 }
 
-/* File list li section */
 #file-list li {
     display: flex;
     justify-content: space-between;
@@ -84,7 +70,6 @@
     border-radius: var(--border-radius);
 }
 
-/* File remove button */
 .file-remove {
     background: none;
     border: none;
