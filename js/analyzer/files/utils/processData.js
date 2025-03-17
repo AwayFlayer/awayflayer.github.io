@@ -6,19 +6,19 @@
  * @returns {Object} - Aggregated data for visualization
  */
 export const processJsonData = (jsonFiles) => {
-  const aggregatedData = {};
-
-  for (const {data} of jsonFiles) {
-    if (Array.isArray(data)) {
-      processArrayData(data, aggregatedData);
-    } else if (data && typeof data === 'object') {
-      processObjectData(data, aggregatedData);
+    const aggregatedData = {};
+  
+    for (const {data} of jsonFiles) {
+      if (Array.isArray(data)) {
+        processArrayData(data, aggregatedData);
+      } else if (data && typeof data === 'object') {
+        processObjectData(data, aggregatedData);
+      }
     }
-  }
-
-  return aggregatedData;
-};
-
+  
+    return aggregatedData;
+  };
+  
 /**
  * Process array data from a JSON file
  * @param {Array} array - Array of data to process
@@ -34,7 +34,7 @@ const processArrayData = (array, result) => {
       }
   });
 };
-
+  
 /**
  * Process object data from a JSON file
  * @param {Object} obj - Object to process
@@ -42,7 +42,7 @@ const processArrayData = (array, result) => {
  */
 const processObjectData = (obj, result) => {
   const numericEntries = Object.entries(obj).filter(([, value]) => typeof value === 'number');
-
+  
   if (numericEntries.length) {
     for (const [key, value] of numericEntries) {
       result[key] = (result[key] ?? 0) + value;

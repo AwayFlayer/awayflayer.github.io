@@ -1,6 +1,7 @@
 /* Copyright (c) 2025 AwayFlayer ** License: MIT */
 
-import {applyViewTransformation, initChartInteractions} from './chartInteraction.js';
+import {applyViewTransformation, initChartInteractions} from '../utils/chartInteraction.js';
+import {generateColors} from '../ui/chartColor.js';
 
 let interactions = null;
 
@@ -10,7 +11,7 @@ let interactions = null;
  * @param {HTMLCanvasElement} canvas - Canvas element to render on
  * @param {Object} viewState - Optional zoom and pan state
  */
-export const renderBarChart = async (data, canvas, viewState = null) => {
+export const renderBarChart = (data, canvas, zoomInfo, viewState = null) => {
     const ctx = canvas.getContext('2d');
     const container = canvas.parentElement;
     canvas.width = container.clientWidth;
@@ -22,8 +23,8 @@ export const renderBarChart = async (data, canvas, viewState = null) => {
     }
 
     if (!interactions) {
-        interactions = await initChartInteractions(canvas, async (state) => {
-            await renderBarChart(data, canvas, state);
+        interactions = initChartInteractions(canvas, zoomInfo, (state) => {
+            renderBarChart(data, canvas, zoomInfo, state);
         }, {chartType: 'bar', minZoom: 0.5, maxZoom: 5});
     }
 
@@ -37,18 +38,16 @@ export const renderBarChart = async (data, canvas, viewState = null) => {
     const chartWidth = canvas.width - padding.left - padding.right;
     const chartHeight = canvas.height - padding.top - padding.bottom;
     const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
-    const barsToShow = sortedData;
-    const totalBars = barsToShow.length;
-    const barSpacing = Math.min(20, chartWidth / (totalBars * 2));
-    const barWidth = (chartWidth - (barSpacing * (totalBars + 1))) / totalBars;
-    const maxValue = Math.max(...barsToShow.map(([_, value]) => value));
-    const colors = await generateColors(totalBars);
+    const barSpacing = Math.min(20, chartWidth / (sortedData.length * 2));
+    const barWidth = (chartWidth - (barSpacing * (sortedData.length + 1))) / sortedData.length;
+    const maxValue = Math.max(...sortedData.map(([_, value]) => value));
+    const colors = generateColors(sortedData.length);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     let restoreCtx = () => {};
     if (viewState) {
-        restoreCtx = await applyViewTransformation(ctx, viewState);
+        restoreCtx = applyViewTransformation(ctx, viewState);
 
         if (viewState.zoomLevel !== 1) {
             container.classList.add('is-zoomed');
@@ -64,15 +63,12 @@ export const renderBarChart = async (data, canvas, viewState = null) => {
     }
 
     ctx.font = 'bold 16px sans-serif';
-    ctx.fillStyle = '#f5f5f5';
+    ctx.fillStyle = 'rgb(255, 255, 255)';
     ctx.textAlign = 'center';
     ctx.fillText('Bar Chart', canvas.width / 2, padding.top / 2);
 
     if (viewState && viewState.zoomLevel !== 1) {
-        ctx.font = '12px sans-serif';
-        ctx.fillStyle = 'rgba(245, 245, 245, 0.7)';
-        ctx.textAlign = 'left';
-        ctx.fillText(`Zoom: ${Math.round(viewState.zoomLevel * 100)}%`, 10, 20);
+        zoomInfo.textContent =  `Zoom: ${Math.round(viewState.zoomLevel * 100)}%`;
     }
 
     ctx.beginPath();
@@ -96,16 +92,16 @@ export const renderBarChart = async (data, canvas, viewState = null) => {
         ctx.beginPath();
         ctx.moveTo(padding.left, yPos);
         ctx.lineTo(canvas.width - padding.right, yPos);
-        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
         ctx.stroke();
         ctx.font = '12px sans-serif';
-        ctx.fillStyle = '#f5f5f5';
+        ctx.fillStyle = 'rgb(255, 255, 255)';
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
         ctx.fillText(Math.round(value).toString(), padding.left - 10, yPos);
     }
 
-    await Promise.all(barsToShow.map(async ([key, value], index) => {
+    sortedData.forEach(([key, value], index) => {
         const barHeight = (value / maxValue) * chartHeight;
         const xPos = padding.left + barSpacing + (index * (barWidth + barSpacing));
         const yPos = canvas.height - padding.bottom - barHeight;
@@ -114,7 +110,7 @@ export const renderBarChart = async (data, canvas, viewState = null) => {
         ctx.fillRect(xPos, yPos, barWidth, barHeight);
 
         ctx.font = '12px sans-serif';
-        ctx.fillStyle = '#f5f5f5';
+        ctx.fillStyle = 'rgb(255, 255, 255)';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'bottom';
 
@@ -136,65 +132,9 @@ export const renderBarChart = async (data, canvas, viewState = null) => {
 
         ctx.fillText(label, 0, 0);
         ctx.restore();
-    }));
+    });
 
     if (viewState) {
         restoreCtx();
-    }
-
-    await updateLegend(barsToShow, colors);
-};
-
-/**
- * Generate an array of colors for the chart bars
- * @param {number} count - Number of colors needed
- * @returns {Array} - Array of hex color codes
- */
-const generateColors = (count) => {
-    const baseHue = 220;
-    const saturation = 65;
-    const lightness = 50;
-
-    return Array.from({length: count}, (_, i) => {
-        const hue = (baseHue + (i * 360 / Math.min(count, 20))) % 360;
-        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    });
-};
-
-/**
- * Update the legend with current data
- * @param {Array} data - Array of [key, value] pairs
- * @param {Array} colors - Array of colors used in the chart
- */
-const updateLegend = async (data, colors) => {
-    const legendContainer = document.getElementById('chart-legend');
-    legendContainer.innerHTML = '';
-    const maxLegendItems = 15;
-    const dataToShow = data.slice(0, maxLegendItems);
-
-    const createLegendItem = async ([key], index) => {
-        const legendItem = document.createElement('div');
-        legendItem.classList.add('legend-item');
-
-        const colorBox = document.createElement('span');
-        colorBox.classList.add('legend-color');
-        colorBox.style.backgroundColor = colors[index % colors.length];
-
-        const label = document.createElement('span');
-        label.textContent = key;
-
-        legendItem.appendChild(colorBox);
-        legendItem.appendChild(label);
-        return legendItem;
-    };
-
-    const legendItems = await Promise.all(dataToShow.map(createLegendItem));
-    legendItems.forEach(item => legendContainer.appendChild(item));
-
-    if (data.length > maxLegendItems) {
-        const moreItem = document.createElement('div');
-        moreItem.classList.add('legend-more');
-        moreItem.textContent = `+ ${data.length - maxLegendItems} more items`;
-        legendContainer.appendChild(moreItem);
     }
 };

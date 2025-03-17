@@ -10,7 +10,7 @@
  * @param {string} [options.chartType='bar'] - Type of the chart (e.g., 'bar', 'pie')
  * @returns {Object} - An object with methods to get state, reset zoom, set options, and set chart type
  */
-export const initChartInteractions = (canvas, renderCallback, options = {}) => {
+export const initChartInteractions = (canvas, zoomInfo, renderCallback, options = {}) => {
     const state = {
         isDragging: false,
         lastX: 0,
@@ -136,6 +136,7 @@ export const initChartInteractions = (canvas, renderCallback, options = {}) => {
         state.offsetX = 0;
         state.offsetY = 0;
         renderCallback({...state, preserveChartType: true});
+        zoomInfo.textContent = "Scroll to zoom, drag to pan, double-click to reset view";
     };
 
     addZoomControls(canvas.parentElement, state, renderCallback);
