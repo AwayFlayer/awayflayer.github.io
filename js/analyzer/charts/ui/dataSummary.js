@@ -2,6 +2,7 @@
 
 /**
  * Updates the data summary table based on the provided sorting method.
+ * @param {Object} processedData - The processed data to display in the summary table.
  * @param {string} method - The method to sort the data by, either "value" or "key".
  */
 export const updateDataSummary = (processedData, method) => {

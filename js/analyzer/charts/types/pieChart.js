@@ -88,7 +88,7 @@ const drawPieSlices = (ctx, data, total, colors, centerX, centerY, radius, viewS
         ctx.fill();
         
         const middleAngle = startAngle + sliceAngle / 2;
-        const percent = Math.round((value / total) * 100);
+        const percent = ((value / total) * 100).toFixed(1);
         
         if (percent >= 5 || (viewState && viewState.zoomLevel > 1.5)) {
             const labelX = centerX + Math.cos(middleAngle) * radius * 0.7;

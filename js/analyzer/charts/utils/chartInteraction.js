@@ -139,7 +139,7 @@ export const initChartInteractions = (canvas, zoomInfo, renderCallback, options 
         zoomInfo.textContent = "Scroll to zoom, drag to pan, double-click to reset view";
     };
 
-    addZoomControls(canvas.parentElement, state, renderCallback);
+    addZoomControls(canvas.parentElement, state, renderCallback, zoomInfo);
 
     canvas.addEventListener('wheel', handleWheel, {passive: false});
     canvas.addEventListener('mousedown', handleMouseDown);
@@ -189,7 +189,7 @@ const createZoomControlButton = (svgPath, title, onClick) => {
  * @param {Object} state - Current zoom/pan state
  * @param {Function} renderCallback - Function to call to re-render chart
  */
-const addZoomControls = (container, state, renderCallback) => {
+const addZoomControls = (container, state, renderCallback, zoomInfo) => {
     const existingControls = document.getElementsByClassName('chart-zoom-controls');
     Array.from(existingControls).forEach(control => control.remove());
     
@@ -222,6 +222,7 @@ const addZoomControls = (container, state, renderCallback) => {
             state.offsetX = 0;
             state.offsetY = 0;
             renderCallback({...state, preserveChartType: true});
+            zoomInfo.textContent = 'Scroll to zoom, drag to pan, double-click to reset view';
         }
     );
 

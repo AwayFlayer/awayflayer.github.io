@@ -1,9 +1,11 @@
 /* Copyright (c) 2025 AwayFlayer ** License: MIT */
 
 /**
- * Updates the file list displayed in the UI.
- * Removes the empty message if there are files, otherwise displays it.
- * Creates list items for each selected file with a remove button.
+ * Updates the file list displayed on the web page.
+ * Removes the empty message if files are present, or adds it if no files are selected.
+ * Adds event listeners to remove files from the list.
+ * @param {Array} files - Array of selected files.
+ * @param {Function} processFiles - Function to process the selected files.
  */
 export const updateFileList = (files, processFiles) => {
   const fileList = document.querySelector('#file-list');
@@ -47,14 +49,17 @@ export const updateFileList = (files, processFiles) => {
    * Removes a file from the files array at the specified index and updates the file list.
    * Processes remaining files if any, otherwise redirects to the index page.
    * @param {number} index - The index of the file to remove.
-   * @param {Array} files - Array of files
+   * @param {Array} files - Array of selected files.
+   * @param {Function} processFiles - Function to process the selected files.
    */
   const removeFile = (index, files, processFiles) => {
     files.splice(index, 1);
-    updateFileList(files, processFiles);
 
+    updateFileList(files, processFiles);
     if (files.length > 0) {
       processFiles(files);
+      const zoomInfo = document.getElementById('zoom-text');
+      zoomInfo.textContent = 'Scroll to zoom, drag to pan, double-click to reset view';
     } else {
       location.href = './analyzer.html';
     }

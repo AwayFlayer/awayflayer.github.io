@@ -40,6 +40,8 @@ export const renderChart = (data, activeChartType) => {
  */
 export const initializeChart = (data) => {
     const colors = generateColors(Object.keys(data).length);
+    window.resetChartInteractions = true;
+    zoomInfo.textContent = 'Scroll to zoom, drag to pan, double-click to reset view';
 
     renderChart(data, 'pie');
     updateLegend(Object.entries(data).sort((a, b) => b[1] - a[1]), colors);

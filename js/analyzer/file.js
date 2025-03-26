@@ -2,6 +2,10 @@
 
 import {updateFileList} from './files/ui/fileList.js';
 
+/**
+ * Initialize file handlers for file input and processing.
+ * Sets up event listeners and dynamically loads necessary resources.
+ */
 export const initializeFileHandlers = () => {
     const fileInput = document.getElementById('file-upload');
     let files = [];
@@ -11,6 +15,8 @@ export const initializeFileHandlers = () => {
      * @param {string} path - Path to the CSS file.
      */
     const loadCSS = (path) => {
+        if (document.querySelector(`link[href="${path}"]`)) return;
+
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = path;
@@ -26,10 +32,9 @@ export const initializeFileHandlers = () => {
             const selectedFiles = Array.from(event.target.files);
             files = [...files, ...selectedFiles];
             const { processFiles } = await import('./chart.js');
+
             updateFileList(files, processFiles);
-
             await processFiles(files);
-
             loadCSS('../../css/analyzer/chart.css');
         } catch (error) {
             console.error('Error processing files:', error);
